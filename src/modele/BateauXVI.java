@@ -7,6 +7,16 @@ import bateaux.Galion;
 import bateaux.Sloup;
 
 public class BateauXVI implements BateauFactory{
+	
+	private static BateauXVI instance;
+	
+	private BateauXVI(){
+		
+	}
+	
+	public static BateauXVI getInstance(){
+		return instance==null ? new BateauXVI():instance;
+	}
 
 	@Override
 	public BateauGros getGrosBateau(Point position, Orientation orientation, Tir tir) {
