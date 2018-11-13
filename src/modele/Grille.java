@@ -1,20 +1,68 @@
 package modele;
 
+import java.awt.Point;
+import java.util.ArrayList;
+
 public class Grille {
-	
+
 	protected int taille;
 	protected int[][] grid;
-	
-	public Grille(){
-		
+	protected ArrayList<Bateau> bateaux;
+
+	public Grille(int taille, ArrayList<Bateau> boats){
+		int idBoat = 1;
+		Point positionBateau;
+		bateaux = boats;
+		grid = new int[taille][taille];
+		this.taille = taille;
+		for (int i = 0 ; i < taille ; i++){
+			for (int j = 0 ; j < taille ; j++){
+				grid[j][i] = 0;
+			}
+		}
+		for (Bateau bateau : boats) {
+			positionBateau = bateau.position;
+			for (int i = 0 ; i < bateau.taille ; i++) {
+				switch(bateau.orientation){
+				case Nord:
+					grid[positionBateau.x][positionBateau.y-i] = idBoat;
+					break;
+				case Est:
+					grid[positionBateau.x+i][positionBateau.y] = idBoat;
+					break;
+				case Sud:
+					grid[positionBateau.x][positionBateau.y+i] = idBoat;
+					break;
+				case Ouest:
+					grid[positionBateau.x-i][positionBateau.y] = idBoat;
+					break;
+				}
+			}
+			idBoat++;
+		}
 	}
-	
+
 	public void afficherGrilleJoueur(){
-		
+		for (int i = 0 ; i < taille ; i++){
+			for (int j = 0 ; j < taille ; j++){
+				System.out.print(grid[j][i]+" ");
+			}
+			System.out.println();
+		}
+		System.out.println();
 	}
-	
+
 	public void afficherGrilleAdversaire(){
-		
+		for (int i = 0 ; i < taille ; i++){
+			for (int j = 0 ; j < taille ; j++){
+				if (grid[j][i] < 0) {
+					System.out.print(grid[j][i]+" ");
+				} else {
+					System.out.print("0 ");					
+				}					
+			}
+			System.out.println();
+		}
 	}
 
 }
