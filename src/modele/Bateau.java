@@ -11,7 +11,17 @@ public abstract class Bateau {
 	protected Orientation orientation;
 	protected Tir tir;
 	
+	public Bateau(int puissance, int resistance, int taille, Point position, Orientation orientation, Tir tir) {
+		super();
+		this.puissance = puissance;
+		this.resistance = resistance;
+		this.taille = taille;
+		this.position = position;
+		this.orientation = orientation;
+		this.tir = tir;
+	}
+
 	public void tirer(Point position) {
-		//TODO
+		tir.tirer(position, puissance);
 	}
 }

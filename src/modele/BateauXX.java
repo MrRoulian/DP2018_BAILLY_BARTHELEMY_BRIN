@@ -1,23 +1,28 @@
 package modele;
 
+import java.awt.Point;
+
+import bateaux.Aeroglisseur;
+import bateaux.Chasseur;
+import bateaux.Croiser;
+
 public class BateauXX implements BateauFactory {
 
 	@Override
-	public BateauGros getGrosBateau() {
-		// TODO Auto-generated method stub
-		return null;
+	public BateauGros getGrosBateau(Point position, Orientation orientation, Tir tir) {
+		return new Croiser(position, orientation, tir);
 	}
 
 	@Override
-	public BateauMoyen getMoyenBateau() {
-		// TODO Auto-generated method stub
-		return null;
+	public BateauMoyen getMoyenBateau(Point position, Orientation orientation, Tir tir) {
+		return new Chasseur(position, orientation, tir);
 	}
 
 	@Override
-	public BateauPetit getPetitBateau() {
-		// TODO Auto-generated method stub
-		return null;
+	public BateauPetit getPetitBateau(Point position, Orientation orientation, Tir tir) {
+		return new Aeroglisseur(position, orientation, tir);
 	}
+
+	
 
 }
