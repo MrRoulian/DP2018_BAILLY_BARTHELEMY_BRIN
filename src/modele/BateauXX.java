@@ -8,11 +8,11 @@ import bateaux.Croiser;
 
 public class BateauXX implements BateauFactory {
 	
-	private BateauXX instance;
+	private static BateauXX instance;
 	
 	private BateauXX() {}
 	
-	public BateauXX getInstance() {
+	public static BateauXX getInstance() {
 		if (instance == null) {
 			instance = new BateauXX();
 		}
