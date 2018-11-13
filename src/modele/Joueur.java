@@ -12,6 +12,7 @@ public abstract class Joueur {
 	public void setAdversaire(Joueur j){
 		this.adversaire = j;
 	}
+	
 	public abstract void jouerTour();
 	
 }

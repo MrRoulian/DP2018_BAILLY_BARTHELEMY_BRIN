@@ -4,7 +4,6 @@ public class Humain extends Joueur {
 
 	public Humain(Grille grid) {
 		super(grid);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

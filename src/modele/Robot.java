@@ -4,7 +4,6 @@ public class Robot extends Joueur {
 
 	public Robot(Grille grid) {
 		super(grid);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
