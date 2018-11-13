@@ -7,6 +7,17 @@ import bateaux.Chasseur;
 import bateaux.Croiser;
 
 public class BateauXX implements BateauFactory {
+	
+	private static BateauXX instance;
+	
+	private BateauXX() {}
+	
+	public static BateauXX getInstance() {
+		if (instance == null) {
+			instance = new BateauXX();
+		}
+		return instance;
+	}
 
 	@Override
 	public BateauGros getGrosBateau(Point position, Orientation orientation, Tir tir) {
