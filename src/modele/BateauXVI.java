@@ -15,7 +15,10 @@ public class BateauXVI implements BateauFactory{
 	}
 	
 	public static BateauXVI getInstance(){
-		return instance==null ? new BateauXVI():instance;
+		if (instance == null){
+			instance = new BateauXVI();
+		}
+		return instance;
 	}
 
 	@Override
