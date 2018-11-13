@@ -2,10 +2,9 @@ package modele;
 
 public class Robot extends Joueur {
 
-	@Override
-	public void setAdversaire(Joueur j) {
-		// TODO Auto-generated method stub
-
+	public Robot(Grille grid) {
+		super(grid);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
