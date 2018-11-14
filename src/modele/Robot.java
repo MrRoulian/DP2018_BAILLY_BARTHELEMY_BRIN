@@ -1,5 +1,7 @@
 package modele;
 
+import java.awt.Point;
+
 public class Robot extends Joueur {
 
 	public Robot(Grille grid) {
@@ -8,8 +10,19 @@ public class Robot extends Joueur {
 
 	@Override
 	public void jouerTour() {
-		// TODO Auto-generated method stub
-
+		int x,y,bateau;
+		bateau = (int) (Math.random() * grid.bateaux.size());
+		while (grid.bateaux.get(bateau).estCoulé()) {
+			bateau = (int) (Math.random() * grid.taille);
+		}
+		x = (int) (Math.random() * grid.taille);
+		y = (int) (Math.random() * grid.taille);
+		
+		
+		this.grid.bateaux.get(bateau).tirer(new Point(x, y), this.adversaire.grid);
+		
+//		this.grid.afficherGrilleJoueur();
+//		this.adversaire.grid.afficherGrilleAdversaire();
 	}
 
 }

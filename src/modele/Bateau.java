@@ -24,7 +24,6 @@ public abstract class Bateau {
 	public void tirer(Point position, Grille cible) {
 		if (!estCoulé()) {
 			tir.tirer(position, cible, puissance);
-			System.out.println(puissance);
 		}
 	}
 	
