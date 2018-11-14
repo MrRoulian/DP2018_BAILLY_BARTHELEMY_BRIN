@@ -54,9 +54,9 @@ public class Grille {
 	public void afficherGrilleJoueur(){
 		for (int i = 0 ; i < taille ; i++){
 			for (int j = 0 ; j < taille ; j++){
-				System.out.print(grid[j][i]+" ");
+				System.out.print(grid[j][i]+"\t");
 			}
-			System.out.println();
+			System.out.println("\n");
 		}
 		System.out.println();
 	}
@@ -65,12 +65,12 @@ public class Grille {
 		for (int i = 0 ; i < taille ; i++){
 			for (int j = 0 ; j < taille ; j++){
 				if (grid[j][i] < 0) {
-					System.out.print(grid[j][i]+" ");
+					System.out.print(grid[j][i]+"\t");
 				} else {
-					System.out.print("0 ");					
+					System.out.print("0\t");					
 				}					
 			}
-			System.out.println();
+			System.out.println("\n");
 		}
 	}
 
