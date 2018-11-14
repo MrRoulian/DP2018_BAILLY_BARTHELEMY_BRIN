@@ -25,7 +25,7 @@ public class Humain extends Joueur {
 			bateau = sc.nextInt();
 		}
 		
-		System.out.println("Selection ud tir :");
+		System.out.println("Selection du tir :");
 		System.out.print("x: ");
 		x = sc.nextInt();
 		System.out.print("y: ");
