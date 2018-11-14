@@ -13,7 +13,7 @@ public class Robot extends Joueur {
 		int x,y,bateau;
 		bateau = (int) (Math.random() * grid.bateaux.size());
 		while (grid.bateaux.get(bateau).estCoulé()) {
-			bateau = (int) (Math.random() * grid.taille);
+			bateau = (int) (Math.random() * grid.bateaux.size());
 		}
 		x = (int) (Math.random() * grid.taille);
 		y = (int) (Math.random() * grid.taille);
