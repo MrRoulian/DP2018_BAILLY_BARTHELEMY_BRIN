@@ -25,9 +25,9 @@ public class Partie {
 		
 		// Joueur 2 :
 		ArrayList<Bateau> listeBateauJ2 = new ArrayList<Bateau>();
-		listeBateauJ2.add(bateauFactory.getGrosBateau(new Point(0, 0), Orientation.Est, new TirCroix()));
-		listeBateauJ2.add(bateauFactory.getMoyenBateau(new Point(0, 1), Orientation.Est, new TirCroix()));
-		listeBateauJ2.add(bateauFactory.getPetitBateau(new Point(0, 2), Orientation.Est, new TirCroix()));
+		listeBateauJ2.add(bateauFactory.getGrosBateau(new Point(0, 7), Orientation.Est, new TirCroix()));
+		listeBateauJ2.add(bateauFactory.getMoyenBateau(new Point(0, 8), Orientation.Est, new TirCroix()));
+		listeBateauJ2.add(bateauFactory.getPetitBateau(new Point(0, 9), Orientation.Est, new TirCroix()));
 		
 		// Creation de la grille :
 		// Joueur 1 :
