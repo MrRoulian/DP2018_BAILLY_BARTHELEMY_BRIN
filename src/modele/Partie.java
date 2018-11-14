@@ -38,7 +38,7 @@ public class Partie {
 		
 		// ----- Creation des joueurs ----- //
 		joueur1 = new Humain(grilleJ1);
-		joueur2 = new Humain(grilleJ2);
+		joueur2 = new Robot(grilleJ2);
 		// ----- Mise en ralation d'afrontement des deux joueurs ----- //
 		joueur1.setAdversaire(joueur2);
 		joueur2.setAdversaire(joueur1);

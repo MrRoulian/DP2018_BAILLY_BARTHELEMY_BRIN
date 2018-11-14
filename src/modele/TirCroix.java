@@ -7,7 +7,7 @@ public class TirCroix implements Tir {
 	@Override
 	public void tirer(Point position, Grille cible, int puissance) {
 		cible.toucher(position, puissance);
-		if (position.x - 1 > 0) {
+		if (position.x - 1 >= 0) {
 			Point pGauche = new Point(position);
 			pGauche.x--;
 			cible.toucher(pGauche, puissance);
@@ -17,7 +17,7 @@ public class TirCroix implements Tir {
 			pDroite.x++;
 			cible.toucher(pDroite, puissance);
 		}
-		if (position.y - 1 > 0) {
+		if (position.y - 1 >= 0) {
 			Point pHaut = new Point(position);
 			pHaut.y--;
 			cible.toucher(pHaut, puissance);
