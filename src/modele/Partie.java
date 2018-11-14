@@ -2,14 +2,15 @@ package modele;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Partie {
+public class Partie extends Observable {
 	
 	private Joueur joueur1;
 	private Joueur joueur2;
 	private BateauFactory bateauFactory;
 	
-	public Partie() {
+	public Partie(){
 		// ----- Recuperation de l'instance de la factory ----- //
 		bateauFactory = BateauXX.getInstance();
 		
@@ -47,16 +48,30 @@ public class Partie {
 	public void lancerPartie() {
 		while (true) {
 			joueur1.jouerTour();
+			this.setChanged();
+			this.notifyObservers();
 			if (joueur2.aPerdu()) {
 				System.out.println("Victoire du joueur 1");
 				break;
 			}
 			joueur2.jouerTour();
+			this.setChanged();
+			this.notifyObservers();
 			if (joueur1.aPerdu()) {
 				System.out.println("Victoire du joueur 2");
 				break;
 			}
 		}
 	}
+
+	public Joueur getJoueur1() {
+		return joueur1;
+	}
+
+	public Joueur getJoueur2() {
+		return joueur2;
+	}
+	
+	
 
 }

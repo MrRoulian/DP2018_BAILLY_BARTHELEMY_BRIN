@@ -25,5 +25,13 @@ public abstract class Joueur {
 		}
 		return perdu;
 	}
+
+	public int getTailleGrid() {
+		return grid.taille;
+	}
+	
+	public Grille getGrille(){
+		return grid;
+	}
 	
 }

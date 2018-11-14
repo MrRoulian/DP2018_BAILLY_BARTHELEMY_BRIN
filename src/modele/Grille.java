@@ -73,5 +73,9 @@ public class Grille {
 			System.out.println("\n");
 		}
 	}
+	
+	public int getCase(int x, int y){
+		return grid[x][y];
+	}
 
 }
