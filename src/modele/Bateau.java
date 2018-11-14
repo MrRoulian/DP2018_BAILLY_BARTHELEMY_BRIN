@@ -21,7 +21,18 @@ public abstract class Bateau {
 		this.tir = tir;
 	}
 
-	public void tirer(Point position) {
-		tir.tirer(position, puissance);
+	public void tirer(Point position, Grille cible) {
+		if (!estCoulé()) {
+			tir.tirer(position, cible, puissance);
+			System.out.println(puissance);
+		}
+	}
+	
+	public void subirFrappe(int puissance) {
+		resistance -= puissance;
+	}
+	
+	public boolean estCoulé() {
+		return resistance < 0;
 	}
 }

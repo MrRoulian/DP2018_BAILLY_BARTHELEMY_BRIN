@@ -9,7 +9,7 @@ import modele.Tir;
 public class Barquasse extends BateauPetit {
 
 	public Barquasse(Point position, Orientation orientation, Tir tir) {
-		super(0, 1, position, orientation, tir);
+		super(1, 1, position, orientation, tir);
 	}
 
 }

@@ -42,6 +42,15 @@ public class Grille {
 		}
 	}
 
+	public void toucher(Point position, int puissance) {
+		if (grid[position.x][position.y] == 0) {
+			grid[position.x][position.y] = -1 * (bateaux.size() + 1);
+		} else if (grid[position.x][position.y] > 0) {
+			bateaux.get(grid[position.x][position.y] -1).subirFrappe(puissance);
+			grid[position.x][position.y] = -1 * grid[position.x][position.y];
+		} 
+	}
+
 	public void afficherGrilleJoueur(){
 		for (int i = 0 ; i < taille ; i++){
 			for (int j = 0 ; j < taille ; j++){

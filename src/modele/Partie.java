@@ -19,15 +19,15 @@ public class Partie {
 		// Creation de la liste de bateau :
 		// Joueur 1 :
 		ArrayList<Bateau> listeBateauJ1 = new ArrayList<Bateau>();
-		listeBateauJ1.add(bateauFactory.getGrosBateau(new Point(0, 0), Orientation.Est, new TirAleatoire()));
-		listeBateauJ1.add(bateauFactory.getMoyenBateau(new Point(0, 1), Orientation.Est, new TirAleatoire()));
-		listeBateauJ1.add(bateauFactory.getPetitBateau(new Point(0, 2), Orientation.Est, new TirAleatoire()));
+		listeBateauJ1.add(bateauFactory.getGrosBateau(new Point(0, 0), Orientation.Est, new TirCroix()));
+		listeBateauJ1.add(bateauFactory.getMoyenBateau(new Point(0, 1), Orientation.Est, new TirCroix()));
+		listeBateauJ1.add(bateauFactory.getPetitBateau(new Point(0, 2), Orientation.Est, new TirCroix()));
 		
 		// Joueur 2 :
 		ArrayList<Bateau> listeBateauJ2 = new ArrayList<Bateau>();
-		listeBateauJ2.add(bateauFactory.getGrosBateau(new Point(0, 0), Orientation.Est, new TirAleatoire()));
-		listeBateauJ2.add(bateauFactory.getMoyenBateau(new Point(0, 1), Orientation.Est, new TirAleatoire()));
-		listeBateauJ2.add(bateauFactory.getPetitBateau(new Point(0, 2), Orientation.Est, new TirAleatoire()));
+		listeBateauJ2.add(bateauFactory.getGrosBateau(new Point(0, 0), Orientation.Est, new TirCroix()));
+		listeBateauJ2.add(bateauFactory.getMoyenBateau(new Point(0, 1), Orientation.Est, new TirCroix()));
+		listeBateauJ2.add(bateauFactory.getPetitBateau(new Point(0, 2), Orientation.Est, new TirCroix()));
 		
 		// Creation de la grille :
 		// Joueur 1 :
@@ -44,6 +44,19 @@ public class Partie {
 		joueur2.setAdversaire(joueur1);
 	}
 	
-	
+	public void lancerPartie() {
+		while (true) {
+			joueur1.jouerTour();
+			if (joueur2.aPerdu()) {
+				System.out.println("Victoire du joueur 1");
+				break;
+			}
+			joueur2.jouerTour();
+			if (joueur1.aPerdu()) {
+				System.out.println("Victoire du joueur 2");
+				break;
+			}
+		}
+	}
 
 }

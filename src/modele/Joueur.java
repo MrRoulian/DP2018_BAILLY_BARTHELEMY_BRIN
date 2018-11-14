@@ -15,4 +15,15 @@ public abstract class Joueur {
 	
 	public abstract void jouerTour();
 	
+	public boolean aPerdu() {
+		boolean perdu = true;
+		for (Bateau bateau : grid.bateaux) {
+			if (!bateau.estCoulé()) {
+				perdu = false; 
+				break;
+			}
+		}
+		return perdu;
+	}
+	
 }
