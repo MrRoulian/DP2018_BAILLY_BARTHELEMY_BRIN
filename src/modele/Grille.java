@@ -77,5 +77,9 @@ public class Grille {
 	public int getCase(int x, int y){
 		return grid[x][y];
 	}
+	
+	public int getNumDansLeau(){
+		return (bateaux.size()+1)*-1;
+	}
 
 }

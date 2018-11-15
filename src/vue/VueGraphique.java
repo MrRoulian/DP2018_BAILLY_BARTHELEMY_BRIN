@@ -31,9 +31,13 @@ public class VueGraphique implements Observer {
 	private JPanel[] panels = new JPanel[4];
 	private int taille;
 	private Joueur j1,j2;
+	private int numDansLeauJ1;
+	private int numDansLeauJ2;
 
 	public VueGraphique(Partie p) {
 		partie = p;
+		numDansLeauJ1 = p.getJoueur1().getGrille().getNumDansLeau();
+		numDansLeauJ2 = p.getJoueur2().getGrille().getNumDansLeau();
 		buildFrame();
 	}
 
@@ -104,13 +108,17 @@ public class VueGraphique implements Observer {
 
 			bt.setText(val+"");
 			
-			if (val < 0){
-				bt.setBackground(Color.RED);
+			if (val < 0){				
+				if (val == numDansLeauJ1){
+					bt.setBackground(Color.RED);	
+				} else {	
+					bt.setBackground(new Color(139,0,0));			
+				}
 			} else if (val > 0){
 				bt.setBackground(Color.BLACK);				
 			} else {
 				bt.setBackground(new Color(56, 27, 232));				
-			}			
+			}	
 			
 			compteur++;
 		}
@@ -125,12 +133,16 @@ public class VueGraphique implements Observer {
 
 			
 			if (val < 0){
-				bt.setText(val+"");
-				bt.setBackground(Color.RED);			
+				bt.setText(val+"");				
+				if (val == numDansLeauJ2){
+					bt.setBackground(Color.RED);	
+				} else {		
+					bt.setBackground(new Color(139,0,0));		
+				}			
 			} else {
 				bt.setText("0");
 				bt.setBackground(new Color(56, 27, 232));				
-			}			
+			}
 			
 			compteur++;
 		}
