@@ -10,17 +10,20 @@ import modele.Partie;
 public class BoutonTir implements ActionListener{
 	
 	private int x,y;
-	private Joueur joueur;
+	private Partie p;
 	
-	public BoutonTir(int x, int y, Joueur joueur) {
+	public BoutonTir(int x, int y, Partie p) {
 		this.x=x;
 		this.y=y;
-		this.joueur=joueur;
+		this.p=p;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		joueur.getGrille().toucher(new Point(x, y), 1);
+		if (p.jouerTourJoueurCourant(p.getJoueurCourant().getNumBateauSelectionne(), x, y)){
+			// le robot joue en random
+			p.jouerTourJoueurCourant(0,0,0);
+		}
 	}
 
 }

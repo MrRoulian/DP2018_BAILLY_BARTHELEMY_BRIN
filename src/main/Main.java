@@ -9,6 +9,6 @@ public class Main {
 		VueGraphique vg = new VueGraphique(p);
 		p.addObserver(vg);
 		
-		p.lancerPartie();
+		//p.lancerPartie();
 	}
 }

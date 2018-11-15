@@ -8,6 +8,7 @@ public class Partie extends Observable {
 	
 	private Joueur joueur1;
 	private Joueur joueur2;
+	private Joueur joueurCourant;
 	private BateauFactory bateauFactory;
 	
 	public Partie(){
@@ -35,14 +36,17 @@ public class Partie extends Observable {
 		Grille grilleJ1 = new Grille(taille, listeBateauJ1);
 		
 		// Joueur 2 :
-		Grille grilleJ2 = new Grille(taille, listeBateauJ2);
+		Grille grilleJ2 = new Grille(taille, listeBateauJ2);		
 		
 		// ----- Creation des joueurs ----- //
 		joueur1 = new Humain(grilleJ1);
 		joueur2 = new Robot(grilleJ2);
 		// ----- Mise en ralation d'afrontement des deux joueurs ----- //
 		joueur1.setAdversaire(joueur2);
-		joueur2.setAdversaire(joueur1);
+		joueur2.setAdversaire(joueur1);		
+
+		// C'est au joueur 1 de jouer
+		joueurCourant = joueur1;
 	}
 	
 	public void lancerPartie() {
@@ -50,18 +54,42 @@ public class Partie extends Observable {
 			joueur1.jouerTour();
 			this.setChanged();
 			this.notifyObservers();
-			if (joueur2.aPerdu()) {
-				System.out.println("Victoire du joueur 1");
-				break;
-			}
+			
 			joueur2.jouerTour();
 			this.setChanged();
 			this.notifyObservers();
-			if (joueur1.aPerdu()) {
-				System.out.println("Victoire du joueur 2");
-				break;
-			}
+			
 		}
+	}
+	
+	public boolean jouerTourJoueurCourant(int numBateau, int x, int y){
+		
+		if (joueur2.aPerdu()) {
+			System.out.println("Victoire du joueur 1");
+			this.setChanged();
+			this.notifyObservers();
+			return false;
+		}
+		if (joueur1.aPerdu()) {
+			System.out.println("Victoire du joueur 2");
+			this.setChanged();
+			this.notifyObservers();
+			return false;
+		}
+		boolean aReussiAJouer = joueurCourant.jouerTour(numBateau, x, y);		
+
+		this.setChanged();
+		this.notifyObservers();
+		
+		if (aReussiAJouer) {
+			joueurCourant = joueurCourant == joueur1 ? joueur2 : joueur1;			
+		}
+		
+		return aReussiAJouer;
+	}
+	
+	public Joueur getJoueurCourant(){
+		return joueurCourant;
 	}
 
 	public Joueur getJoueur1() {

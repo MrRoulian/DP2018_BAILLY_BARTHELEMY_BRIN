@@ -4,6 +4,7 @@ public abstract class Joueur {
 	
 	protected Joueur adversaire;
 	protected Grille grid;
+	protected int numBateauSelectionne;
 	
 	public Joueur(Grille grid){
 		this.grid=grid;
@@ -14,6 +15,7 @@ public abstract class Joueur {
 	}
 	
 	public abstract void jouerTour();
+	public abstract boolean jouerTour(int numBateau, int x, int y);
 	
 	public boolean aPerdu() {
 		boolean perdu = true;
@@ -33,5 +35,14 @@ public abstract class Joueur {
 	public Grille getGrille(){
 		return grid;
 	}
+	
+	public int getNumBateauSelectionne(){
+		return numBateauSelectionne;
+	}
+	
+	public void setNumBateauSelectionne(int numBateau){
+		this.numBateauSelectionne = numBateau;
+	}
+
 	
 }

@@ -24,19 +24,34 @@ public class Humain extends Joueur {
 			System.out.println("Selection du bateau qui tire");
 			bateau = sc.nextInt();
 		}
-		
+
 		System.out.println("Selection du tir :");
 		System.out.print("x: ");
 		x = sc.nextInt();
 		System.out.print("y: ");
 		y = sc.nextInt();
 		System.out.println("Tir en : (" + x + "," + y + ")");
-		
-		
+
+
 		this.grid.bateaux.get(bateau - 1).tirer(new Point(x, y), this.adversaire.grid);
-		
+
 		this.grid.afficherGrilleJoueur();
 		this.adversaire.grid.afficherGrilleAdversaire();
+	}
+
+	@Override
+	public boolean jouerTour(int numBateau, int x, int y) {
+
+		if (numBateau - 1 < 0 || numBateau - 1 > grid.bateaux.size()) {
+			System.err.println("Le bateau " + numBateau + " n'existe pas");
+			return false;
+		} else if (grid.bateaux.get(numBateau - 1).estCoulé()){
+			System.err.println("Le bateau " + numBateau + " est coulé il ne peux pas tirer");
+			return false;
+		}
+
+		this.grid.bateaux.get(numBateau - 1).tirer(new Point(x, y), this.adversaire.grid);	
+		return true;
 	}
 
 }

@@ -25,4 +25,10 @@ public class Robot extends Joueur {
 //		this.adversaire.grid.afficherGrilleAdversaire();
 	}
 
+	@Override
+	public boolean jouerTour(int numBateau, int x, int y) {
+		jouerTour();
+		return true;
+	}
+
 }
