@@ -15,6 +15,7 @@ public abstract class Joueur {
 	}
 	
 	public abstract void jouerTour();
+	
 	public abstract boolean jouerTour(int numBateau, int x, int y);
 	
 	public boolean aPerdu() {
@@ -42,6 +43,10 @@ public abstract class Joueur {
 	
 	public void setNumBateauSelectionne(int numBateau){
 		this.numBateauSelectionne = numBateau;
+	}
+
+	public Joueur getAdversaire() {
+		return adversaire;
 	}
 
 	

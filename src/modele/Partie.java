@@ -62,7 +62,11 @@ public class Partie extends Observable {
 		}
 	}
 	
-	public boolean jouerTourJoueurCourant(int numBateau, int x, int y){
+	public boolean jouerTour(Joueur joueur, int x, int y){
+		
+		if (joueur != joueurCourant){
+			return false;
+		}
 		
 		if (joueur2.aPerdu()) {
 			System.out.println("Victoire du joueur 1");
@@ -76,7 +80,7 @@ public class Partie extends Observable {
 			this.notifyObservers();
 			return false;
 		}
-		boolean aReussiAJouer = joueurCourant.jouerTour(numBateau, x, y);		
+		boolean aReussiAJouer = joueur.jouerTour(joueur.getNumBateauSelectionne(), x, y);		
 
 		this.setChanged();
 		this.notifyObservers();

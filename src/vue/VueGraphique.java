@@ -30,14 +30,16 @@ public class VueGraphique implements Observer {
 	//panel 3 panel du milieu avec les controles
 	private JPanel[] panels = new JPanel[4];
 	private int taille;
-	private Joueur j1,j2;
-	private int numDansLeauJ1;
-	private int numDansLeauJ2;
+	private Joueur joueur, adversaire;
+	private int numDansLeauJoueur;
+	private int numDansLeauAdversaire;
 
-	public VueGraphique(Partie p) {
+	public VueGraphique(Partie p, Joueur joueur) {
 		partie = p;
-		numDansLeauJ1 = p.getJoueur1().getGrille().getNumDansLeau();
-		numDansLeauJ2 = p.getJoueur2().getGrille().getNumDansLeau();
+		this.joueur = joueur;
+		this.adversaire = joueur.getAdversaire();
+		this.numDansLeauJoueur = joueur.getGrille().getNumDansLeau();
+		this.numDansLeauAdversaire = adversaire.getGrille().getNumDansLeau();
 		buildFrame();
 	}
 
@@ -50,9 +52,7 @@ public class VueGraphique implements Observer {
 			panels[i] = new JPanel();
 		}
 
-		taille = partie.getJoueur1().getTailleGrid();
-		j1 = partie.getJoueur1();
-		j2 = partie.getJoueur2();
+		taille = joueur.getTailleGrid();
 		
 		panels[0].setLayout(new GridLayout(1, 2));
 
@@ -62,8 +62,8 @@ public class VueGraphique implements Observer {
 			for (int j = 0 ; j < taille ; j++){
 				bouton = new JButton();
 				bouton.setForeground(Color.WHITE);
-				bouton.setText(j1.getGrille().getCase(j, i)+"");
-				bouton.addActionListener(new BoutonSelectionBateau(Integer.parseInt(bouton.getText()), partie));
+				bouton.setText(joueur.getGrille().getCase(j, i)+"");
+				bouton.addActionListener(new BoutonSelectionBateau(Integer.parseInt(bouton.getText()), joueur));
 				panels[1].add(bouton);
 			}
 		}
@@ -73,7 +73,7 @@ public class VueGraphique implements Observer {
 			for (int j = 0 ; j < taille ; j++){
 				bouton = new JButton();
 				bouton.setForeground(Color.WHITE);
-				bouton.addActionListener(new BoutonTir(j, i, partie));
+				bouton.addActionListener(new BoutonTir(j, i, partie, joueur));
 				panels[2].add(bouton);
 			}
 		}
@@ -104,12 +104,12 @@ public class VueGraphique implements Observer {
 			JButton bt = (JButton)child;			
 			x=compteur%taille;
 			y=compteur/taille;
-			val = j1.getGrille().getCase(x, y);
+			val = joueur.getGrille().getCase(x, y);
 
 			bt.setText(val+"");
 			
 			if (val < 0){				
-				if (val == numDansLeauJ1){
+				if (val == numDansLeauJoueur){
 					bt.setBackground(Color.RED);	
 				} else {	
 					bt.setBackground(new Color(139,0,0));			
@@ -129,12 +129,12 @@ public class VueGraphique implements Observer {
 			JButton bt = (JButton)child;			
 			x=compteur%taille;
 			y=compteur/taille;
-			val = j2.getGrille().getCase(x, y);
+			val = adversaire.getGrille().getCase(x, y);
 
 			
 			if (val < 0){
 				bt.setText(val+"");				
-				if (val == numDansLeauJ2){
+				if (val == numDansLeauAdversaire){
 					bt.setBackground(Color.RED);	
 				} else {		
 					bt.setBackground(new Color(139,0,0));		
