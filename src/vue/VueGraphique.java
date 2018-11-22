@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,7 +13,6 @@ import javax.swing.JPanel;
 
 import controler.BoutonSelectionBateau;
 import controler.BoutonTir;
-import javafx.scene.control.TextField;
 import modele.Joueur;
 import modele.Partie;
 
@@ -63,7 +60,7 @@ public class VueGraphique implements Observer {
 				bouton = new JButton();
 				bouton.setForeground(Color.WHITE);
 				bouton.setText(joueur.getGrille().getCase(j, i)+"");
-				bouton.addActionListener(new BoutonSelectionBateau(Integer.parseInt(bouton.getText()), joueur));
+				//bouton.addActionListener(new BoutonSelectionBateau(Integer.parseInt(bouton.getText()), joueur));
 				panels[1].add(bouton);
 			}
 		}
@@ -73,14 +70,14 @@ public class VueGraphique implements Observer {
 			for (int j = 0 ; j < taille ; j++){
 				bouton = new JButton();
 				bouton.setForeground(Color.WHITE);
-				bouton.addActionListener(new BoutonTir(j, i, partie, joueur));
+				//bouton.addActionListener(new BoutonTir(j, i, partie, joueur));
 				panels[2].add(bouton);
 			}
 		}
 		
 		panels[3].setPreferredSize(new Dimension(100, 50));
 		panels[3].setLayout(new GridLayout(2, 2));
-		panels[3].add(new java.awt.TextField("Choisir un bateau pour tirer, il suffit de cliquer dessus"));
+		panels[3].add(new java.awt.TextField("Pour jouer écrivez dans l'invit de commande"));
 		
 		
 		panels[0].add(panels[1]);

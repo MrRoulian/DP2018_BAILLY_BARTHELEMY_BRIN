@@ -11,6 +11,10 @@ public class Humain extends Joueur {
 
 	@Override
 	public void jouerTour() {
+		
+		this.grid.afficherGrilleJoueur();
+		this.adversaire.grid.afficherGrilleAdversaire();
+		
 		int x,y,bateau;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Selection du bateau qui tire");
@@ -32,11 +36,7 @@ public class Humain extends Joueur {
 		y = sc.nextInt();
 		System.out.println("Tir en : (" + x + "," + y + ")");
 
-
-		this.grid.bateaux.get(bateau - 1).tirer(new Point(x, y), this.adversaire.grid);
-
-		this.grid.afficherGrilleJoueur();
-		this.adversaire.grid.afficherGrilleAdversaire();
+		this.grid.bateaux.get(bateau - 1).tirer(new Point(x, y), this.adversaire.grid);		
 	}
 
 	@Override
