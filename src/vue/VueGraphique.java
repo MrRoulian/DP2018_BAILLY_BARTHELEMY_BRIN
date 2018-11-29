@@ -11,8 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import controler.BoutonSelectionBateau;
-import controler.BoutonTir;
 import modele.Joueur;
 import modele.Partie;
 
@@ -78,7 +76,6 @@ public class VueGraphique implements Observer {
 		panels[3].setPreferredSize(new Dimension(100, 50));
 		panels[3].setLayout(new GridLayout(2, 2));
 		panels[3].add(new java.awt.TextField("Pour jouer écrivez dans l'invit de commande"));
-		
 		
 		panels[0].add(panels[1]);
 		panels[0].add(panels[3]);

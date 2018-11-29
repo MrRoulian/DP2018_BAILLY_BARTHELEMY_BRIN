@@ -4,7 +4,6 @@ public abstract class Joueur {
 	
 	protected Joueur adversaire;
 	protected Grille grid;
-	protected int numBateauSelectionne;
 	
 	public Joueur(Grille grid){
 		this.grid=grid;
@@ -35,14 +34,6 @@ public abstract class Joueur {
 	
 	public Grille getGrille(){
 		return grid;
-	}
-	
-	public int getNumBateauSelectionne(){
-		return numBateauSelectionne;
-	}
-	
-	public void setNumBateauSelectionne(int numBateau){
-		this.numBateauSelectionne = numBateau;
 	}
 
 	public Joueur getAdversaire() {

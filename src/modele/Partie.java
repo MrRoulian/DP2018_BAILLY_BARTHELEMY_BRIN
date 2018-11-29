@@ -4,11 +4,10 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class Partie extends Observable {
+public class Partie extends Observable implements InterfacePartie {
 	
 	private Joueur joueur1;
 	private Joueur joueur2;
-	private Joueur joueurCourant;
 	private BateauFactory bateauFactory;
 	
 	public Partie(){
@@ -43,10 +42,7 @@ public class Partie extends Observable {
 		joueur2 = new Robot(grilleJ2);
 		// ----- Mise en ralation d'afrontement des deux joueurs ----- //
 		joueur1.setAdversaire(joueur2);
-		joueur2.setAdversaire(joueur1);		
-
-		// C'est au joueur 1 de jouer
-		joueurCourant = joueur1;
+		joueur2.setAdversaire(joueur1);
 	}
 	
 	public void lancerPartie() {
@@ -61,40 +57,6 @@ public class Partie extends Observable {
 			
 		}
 	}
-	
-	public boolean jouerTour(Joueur joueur, int x, int y){
-		
-		if (joueur != joueurCourant){
-			return false;
-		}
-		
-		if (joueur2.aPerdu()) {
-			System.out.println("Victoire du joueur 1");
-			this.setChanged();
-			this.notifyObservers();
-			return false;
-		}
-		if (joueur1.aPerdu()) {
-			System.out.println("Victoire du joueur 2");
-			this.setChanged();
-			this.notifyObservers();
-			return false;
-		}
-		boolean aReussiAJouer = joueur.jouerTour(joueur.getNumBateauSelectionne(), x, y);		
-
-		this.setChanged();
-		this.notifyObservers();
-		
-		if (aReussiAJouer) {
-			joueurCourant = joueurCourant == joueur1 ? joueur2 : joueur1;			
-		}
-		
-		return aReussiAJouer;
-	}
-	
-	public Joueur getJoueurCourant(){
-		return joueurCourant;
-	}
 
 	public Joueur getJoueur1() {
 		return joueur1;
@@ -102,6 +64,11 @@ public class Partie extends Observable {
 
 	public Joueur getJoueur2() {
 		return joueur2;
+	}
+
+	@Override
+	public Grille getGridJoueur1() {
+		return joueur1.grid;
 	}
 	
 	
