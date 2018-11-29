@@ -1,8 +1,6 @@
 package modele;
 
-import java.awt.Point;
 import java.io.Serializable;
-import java.util.Scanner;
 
 public class Humain extends Joueur implements Serializable {
 
@@ -10,11 +8,11 @@ public class Humain extends Joueur implements Serializable {
 		super(grid,id);
 	}
 
-	@Override
+	/*@Override
 	public void jouerTour(Joueur adversaire) {
 		
-		/*this.grid.afficherGrilleJoueur();
-		adversaire.grid.afficherGrilleAdversaire();*/
+		//this.grid.afficherGrilleJoueur();
+		//adversaire.grid.afficherGrilleAdversaire();
 		
 		int x,y,bateau;
 		Scanner sc = new Scanner(System.in);
@@ -38,6 +36,30 @@ public class Humain extends Joueur implements Serializable {
 		System.out.println("Tir en : (" + x + "," + y + ")");
 
 		this.grid.bateaux.get(bateau - 1).tirer(new Point(x, y), adversaire.grid);		
+	}*/
+	
+	@Override
+	public boolean jouerTour(Joueur adversaire) {
+		
+		if (this.ciblePourTirer == null){
+			return false;
+		}
+		
+ 		if (numBateauSelectionne - 1 < 0 || numBateauSelectionne - 1 > grid.bateaux.size()) {
+			System.err.println("Le bateau " + numBateauSelectionne + " n'existe pas");
+			return false;
+		} else if (grid.bateaux.get(numBateauSelectionne - 1).estCoulé()){
+			System.err.println("Le bateau " + numBateauSelectionne + " est coulé il ne peux pas tirer");
+			return false;
+		}
+
+		System.out.println("tir de " + numBateauSelectionne + " du joueur avec l'id " + id + " au point " + ciblePourTirer);
+		
+ 		this.grid.bateaux.get(numBateauSelectionne - 1).tirer(ciblePourTirer, adversaire.grid);
+ 		//ne fonctionne pas pour une raison inconnue alors je le refais dans le client
+ 		this.ciblePourTirer = null;
+ 		
+		return true;
 	}
 
 }

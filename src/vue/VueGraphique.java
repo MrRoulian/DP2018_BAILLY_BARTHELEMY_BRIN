@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.TextField;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
@@ -12,6 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controler.BoutonSelectionBateau;
+import controler.BoutonTir;
+import modele.InterfacePartie;
 import modele.Joueur;
 import modele.Partie;
 
@@ -24,16 +28,19 @@ public class VueGraphique implements Serializable {
 	//panel 2 contient grid de l'adversaire
 	//panel 3 panel du milieu avec les controles
 	private JPanel[] panels = new JPanel[4];
+	private TextField tf;
 	private int taille;
 	private Joueur joueur, adversaire;
 	private int numDansLeauJoueur;
 	private int numDansLeauAdversaire;
+	private InterfacePartie iPartie;
 
-	public VueGraphique(Joueur joueur, Joueur adversaire) {
+	public VueGraphique(Joueur joueur, Joueur adversaire, InterfacePartie iPartie) {
 		this.joueur = joueur;
 		this.adversaire = adversaire;
 		this.numDansLeauJoueur = joueur.getGrille().getNumDansLeau();
 		this.numDansLeauAdversaire = adversaire.getGrille().getNumDansLeau();
+		this.iPartie = iPartie;
 		buildFrame();
 	}
 
@@ -57,7 +64,7 @@ public class VueGraphique implements Serializable {
 				bouton = new JButton();
 				bouton.setForeground(Color.WHITE);
 				bouton.setText(joueur.getGrille().getCase(j, i)+"");
-				//bouton.addActionListener(new BoutonSelectionBateau(Integer.parseInt(bouton.getText()), joueur));
+				bouton.addActionListener(new BoutonSelectionBateau(Integer.parseInt(bouton.getText()), joueur));
 				panels[1].add(bouton);
 			}
 		}
@@ -67,14 +74,15 @@ public class VueGraphique implements Serializable {
 			for (int j = 0 ; j < taille ; j++){
 				bouton = new JButton();
 				bouton.setForeground(Color.WHITE);
-				//bouton.addActionListener(new BoutonTir(j, i, partie, joueur));
+				bouton.addActionListener(new BoutonTir(j, i, iPartie, joueur));
 				panels[2].add(bouton);
 			}
 		}
 		
 		panels[3].setPreferredSize(new Dimension(100, 50));
 		panels[3].setLayout(new GridLayout(2, 2));
-		panels[3].add(new java.awt.TextField("Pour jouer écrivez dans l'invit de commande"));
+		tf = new java.awt.TextField("Cliquer sur un bateau pour le sélectionner");
+		panels[3].add(tf);
 		
 		panels[0].add(panels[1]);
 		panels[0].add(panels[3]);
@@ -85,10 +93,20 @@ public class VueGraphique implements Serializable {
 		frame.pack();
 		frame.setVisible(true);
 		
-		this.update(null, null);
+		this.update();
+	}
+	
+	public void updateJoueur(Joueur j1, Joueur j2){
+		if (joueur.equals(j1)){
+			joueur=j1;
+			adversaire=j2;
+		} else {
+			joueur=j2;
+			adversaire=j1;
+		}
 	}
 
-	public void update(Observable arg0, Object arg1) {
+	public void update() {
 		int compteur = 0;
 		int x=0,y=0,val;
 		
@@ -137,10 +155,18 @@ public class VueGraphique implements Serializable {
 			}
 			
 			compteur++;
+		}	
+		
+		String txt;
+		if (joueur.getNumBateauSelectionne() != 0){
+			txt = "Bateau "+joueur.getNumBateauSelectionne()+" selectionné, "+joueur.getGrille().getBateau(joueur.getNumBateauSelectionne()-1).toString()+"\n";
+			if (joueur.getGrille().getBateau(joueur.getNumBateauSelectionne()-1).estCoulé()){
+				txt += "Le bateau est coulé il ne pourra pas tirer !";
+			}
+			tf.setText(txt);			
+		} else {
+			tf.setText("Cliquer sur un bateau pour le sélectionner");
 		}
-
-
-
 	}
 
 }

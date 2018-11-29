@@ -35,4 +35,11 @@ public abstract class Bateau implements Serializable {
 	public boolean estCoulé() {
 		return resistance < 0;
 	}
+
+	@Override
+	public String toString() {
+		return "[puissance=" + puissance + ", point de vie=" + resistance + ", tir=" + tir + "]";
+	}
+	
+	
 }

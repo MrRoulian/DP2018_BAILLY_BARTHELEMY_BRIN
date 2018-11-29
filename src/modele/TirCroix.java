@@ -29,4 +29,8 @@ public class TirCroix implements Tir {
 		}
 	}
 	
+	public String toString(){
+		return "Tir en croix";
+	}
+	
 }

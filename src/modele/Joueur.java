@@ -1,23 +1,23 @@
 package modele;
 
+import java.awt.Point;
 import java.io.Serializable;
 import java.util.Scanner;
 
 public abstract class Joueur implements Serializable{
 	
 	protected Grille grid;
-	private int id;
+	protected int id;
+	protected int numBateauSelectionne;
+	protected Point ciblePourTirer;
 	
 	public Joueur(Grille grid, int id){
 		this.grid=grid;
 		this.id = id;
+		this.numBateauSelectionne = 0;
 	}
-
-	/*public void setAdversaire(Joueur j){
-		this.adversaire = j;
-	}*/
 	
-	public abstract void jouerTour(Joueur adversaire);
+	public abstract boolean jouerTour(Joueur adversaire);
 	
 	public boolean aPerdu() {
 		boolean perdu = true;
@@ -50,6 +50,26 @@ public abstract class Joueur implements Serializable{
 		if (id != other.id)
 			return false;
 		return true;
+	}
+	
+	public int getNumBateauSelectionne(){
+		return numBateauSelectionne;
+	}
+
+	public void setNumBateauSelectionne(int numBateau) {
+		this.numBateauSelectionne = numBateau;		
+	}
+
+	public Point getCiblePourTirer() {
+		return ciblePourTirer;
+	}
+
+	public void setCiblePourTirer(Point ciblePourTier) {
+		this.ciblePourTirer = ciblePourTier;
+	}
+	
+	public int getId(){
+		return id;
 	}
 	
 }

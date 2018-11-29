@@ -82,5 +82,9 @@ public class Grille implements Serializable{
 	public int getNumDansLeau(){
 		return (bateaux.size()+1)*-1;
 	}
+	
+	public Bateau getBateau(int numBateau){
+		return bateaux.get(numBateau);
+	}
 
 }

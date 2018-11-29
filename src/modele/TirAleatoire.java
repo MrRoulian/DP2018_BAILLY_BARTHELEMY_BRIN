@@ -10,5 +10,9 @@ public class TirAleatoire implements Tir {
 		position.y = (int) (Math.random() * cible.taille);
 		cible.toucher(position,puissance);
 	}
+	
+	public String toString(){
+		return "Tir aléatoire";
+	}
 
 }

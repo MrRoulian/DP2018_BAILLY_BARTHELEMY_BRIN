@@ -10,7 +10,7 @@ public class Robot extends Joueur implements Serializable {
 	}
 
 	@Override
-	public void jouerTour(Joueur adversaire) {
+	public boolean jouerTour(Joueur adversaire) {
 		int x,y,bateau;
 		bateau = (int) (Math.random() * grid.bateaux.size());
 		while (grid.bateaux.get(bateau).estCoulé()) {
@@ -19,11 +19,15 @@ public class Robot extends Joueur implements Serializable {
 		x = (int) (Math.random() * grid.taille);
 		y = (int) (Math.random() * grid.taille);
 		
+
+		System.out.println("tir du bateau " + (bateau+1) + " du joueur avec l'id " + id + " au point " + new Point(x, y));
 		
 		this.grid.bateaux.get(bateau).tirer(new Point(x, y), adversaire.grid);
 		
 //		this.grid.afficherGrilleJoueur();
 //		this.adversaire.grid.afficherGrilleAdversaire();
+		
+		return true;
 	}
 
 }
