@@ -1,21 +1,23 @@
 package modele;
 
-public abstract class Joueur {
+import java.io.Serializable;
+import java.util.Scanner;
+
+public abstract class Joueur implements Serializable{
 	
-	protected Joueur adversaire;
 	protected Grille grid;
+	private int id;
 	
-	public Joueur(Grille grid){
+	public Joueur(Grille grid, int id){
 		this.grid=grid;
+		this.id = id;
 	}
 
-	public void setAdversaire(Joueur j){
+	/*public void setAdversaire(Joueur j){
 		this.adversaire = j;
-	}
+	}*/
 	
-	public abstract void jouerTour();
-	
-	public abstract boolean jouerTour(int numBateau, int x, int y);
+	public abstract void jouerTour(Joueur adversaire);
 	
 	public boolean aPerdu() {
 		boolean perdu = true;
@@ -36,9 +38,18 @@ public abstract class Joueur {
 		return grid;
 	}
 
-	public Joueur getAdversaire() {
-		return adversaire;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Joueur other = (Joueur) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
-
 	
 }

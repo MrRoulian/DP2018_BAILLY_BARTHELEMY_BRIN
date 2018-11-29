@@ -1,8 +1,9 @@
 package modele;
 
 import java.awt.Point;
+import java.io.Serializable;
 
-public abstract class Bateau {
+public abstract class Bateau implements Serializable {
 
 	protected int puissance;
 	protected int resistance;

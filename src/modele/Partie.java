@@ -1,16 +1,22 @@
 package modele;
 
 import java.awt.Point;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Observable;
 
-public class Partie extends Observable implements InterfacePartie {
+import vue.VueGraphique;
+
+public class Partie extends UnicastRemoteObject implements InterfacePartie {
 	
 	private Joueur joueur1;
 	private Joueur joueur2;
+	private Joueur joueurCourant;
 	private BateauFactory bateauFactory;
+	private transient VueGraphique vg;
+	private boolean joueur1Libre = true;
 	
-	public Partie(){
+	public Partie() throws RemoteException{
 		// ----- Recuperation de l'instance de la factory ----- //
 		bateauFactory = BateauXX.getInstance();
 		
@@ -38,24 +44,33 @@ public class Partie extends Observable implements InterfacePartie {
 		Grille grilleJ2 = new Grille(taille, listeBateauJ2);		
 		
 		// ----- Creation des joueurs ----- //
-		joueur1 = new Humain(grilleJ1);
-		joueur2 = new Robot(grilleJ2);
-		// ----- Mise en ralation d'afrontement des deux joueurs ----- //
-		joueur1.setAdversaire(joueur2);
-		joueur2.setAdversaire(joueur1);
+		joueur1 = new Humain(grilleJ1,1);
+		joueur2 = new Humain(grilleJ2,2);
+		
+		//----Set du joueur courant ----//
+		joueurCourant = joueur1;
 	}
 	
 	public void lancerPartie() {
 		while (true) {
-			joueur1.jouerTour();
-			this.setChanged();
-			this.notifyObservers();
+			joueur1.jouerTour(joueur2);
+			vg.update(null, null);
 			
-			joueur2.jouerTour();
-			this.setChanged();
-			this.notifyObservers();
-			
+			joueur2.jouerTour(joueur1);
+			vg.update(null, null);
 		}
+	}
+	
+	@Override
+	public boolean jouerTour(Joueur j){
+		Joueur adversaire = j.equals(joueur1)?joueur2:joueur1;
+		if (j.equals(joueurCourant)){
+			j.jouerTour(adversaire);
+			joueurCourant = adversaire;
+			vg.update(null, null);
+			return true;
+		}
+		return false;
 	}
 
 	public Joueur getJoueur1() {
@@ -67,8 +82,28 @@ public class Partie extends Observable implements InterfacePartie {
 	}
 
 	@Override
-	public Grille getGridJoueur1() {
-		return joueur1.grid;
+	public Joueur getJoueur01() {
+		return joueur1;
+	}
+	
+	@Override
+	public Joueur getJoueur02() {
+		return joueur2;
+	}
+
+	@Override
+	public void setVueGraphique(VueGraphique vg) {
+		this.vg=vg;
+	}
+
+	@Override
+	public boolean getJoueur1Libre() throws RemoteException {
+		return joueur1Libre;
+	}
+
+	@Override
+	public void setJoueur1Libre(boolean b) throws RemoteException {
+		joueur1Libre = b;		
 	}
 	
 	

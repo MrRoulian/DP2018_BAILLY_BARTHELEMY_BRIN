@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,9 +15,8 @@ import javax.swing.JPanel;
 import modele.Joueur;
 import modele.Partie;
 
-public class VueGraphique implements Observer {
+public class VueGraphique implements Serializable {
 
-	private Partie partie;
 
 	private JFrame frame = new JFrame("Bataille Navale");
 	//panel 0 contient les 3 autres panel
@@ -29,10 +29,9 @@ public class VueGraphique implements Observer {
 	private int numDansLeauJoueur;
 	private int numDansLeauAdversaire;
 
-	public VueGraphique(Partie p, Joueur joueur) {
-		partie = p;
+	public VueGraphique(Joueur joueur, Joueur adversaire) {
 		this.joueur = joueur;
-		this.adversaire = joueur.getAdversaire();
+		this.adversaire = adversaire;
 		this.numDansLeauJoueur = joueur.getGrille().getNumDansLeau();
 		this.numDansLeauAdversaire = adversaire.getGrille().getNumDansLeau();
 		buildFrame();
@@ -89,7 +88,6 @@ public class VueGraphique implements Observer {
 		this.update(null, null);
 	}
 
-	@Override
 	public void update(Observable arg0, Object arg1) {
 		int compteur = 0;
 		int x=0,y=0,val;

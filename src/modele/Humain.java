@@ -1,19 +1,20 @@
 package modele;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Humain extends Joueur {
+public class Humain extends Joueur implements Serializable {
 
-	public Humain(Grille grid) {
-		super(grid);
+	public Humain(Grille grid, int id) {
+		super(grid,id);
 	}
 
 	@Override
-	public void jouerTour() {
+	public void jouerTour(Joueur adversaire) {
 		
-		this.grid.afficherGrilleJoueur();
-		this.adversaire.grid.afficherGrilleAdversaire();
+		/*this.grid.afficherGrilleJoueur();
+		adversaire.grid.afficherGrilleAdversaire();*/
 		
 		int x,y,bateau;
 		Scanner sc = new Scanner(System.in);
@@ -36,22 +37,7 @@ public class Humain extends Joueur {
 		y = sc.nextInt();
 		System.out.println("Tir en : (" + x + "," + y + ")");
 
-		this.grid.bateaux.get(bateau - 1).tirer(new Point(x, y), this.adversaire.grid);		
-	}
-
-	@Override
-	public boolean jouerTour(int numBateau, int x, int y) {
-
-		if (numBateau - 1 < 0 || numBateau - 1 > grid.bateaux.size()) {
-			System.err.println("Le bateau " + numBateau + " n'existe pas");
-			return false;
-		} else if (grid.bateaux.get(numBateau - 1).estCoulé()){
-			System.err.println("Le bateau " + numBateau + " est coulé il ne peux pas tirer");
-			return false;
-		}
-
-		this.grid.bateaux.get(numBateau - 1).tirer(new Point(x, y), this.adversaire.grid);	
-		return true;
+		this.grid.bateaux.get(bateau - 1).tirer(new Point(x, y), adversaire.grid);		
 	}
 
 }

@@ -1,9 +1,10 @@
 package modele;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Grille {
+public class Grille implements Serializable{
 
 	protected int taille;
 	protected int[][] grid;

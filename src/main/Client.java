@@ -7,7 +7,9 @@ import java.rmi.registry.Registry;
 
 import javax.naming.NamingException;
 
-import modele.Partie;
+import modele.InterfacePartie;
+import modele.Joueur;
+import vue.VueGraphique;
 
 public class Client {
 	
@@ -19,9 +21,33 @@ public class Client {
 		for (int i=0; i<e.length; i++)
 			System.out.println(e[i]);
 		
-		Partie p = (Partie) registry.lookup("Bataille_navale");
+		InterfacePartie p = (InterfacePartie) registry.lookup("Bataille_navale");
+		Joueur moi = null;
+		Joueur adversaire = null;
+		if (p.getJoueur1Libre()){
+			moi = p.getJoueur01();
+			adversaire = p.getJoueur02();
+			p.setJoueur1Libre(false);			
+		} else {
+			moi = p.getJoueur02();
+			adversaire = p.getJoueur01();
+		}
 		
-		System.out.println("Voilà la grille du joueur1" + p.getGridJoueur1());
+		VueGraphique vg = new VueGraphique(moi,adversaire);
+		p.setVueGraphique(vg);
+		
+		while(true){
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			if (p.jouerTour(moi)){
+				vg.update(null, null);
+			}
+		}
+		
 	}
 	
 }
