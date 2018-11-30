@@ -18,15 +18,21 @@ public class BoutonTir implements ActionListener{
 		this.x=x;
 		this.y=y;
 		this.p=p;
-		this.j=j;
+		//Le joueur j ici est le joueur à l'initialisation de la map, il a tout ses boats full life
+		this.j= j;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		try {
 			//Si c'est ton tour, que t'as déjà selectionné un bateau et que celui ci n'est pas coulé tu peux selectionner la ou tu veux tirer
-			if (j.getNumBateauSelectionne()>0 && j.equals(p.getJoueurCourant()) && !j.getGrille().getBateau(j.getNumBateauSelectionne()-1).estCoulé()){
-				j.setCiblePourTirer(new Point(x,y));				
+			if (j.getNumBateauSelectionne()>0 && j.equals(p.getJoueurCourant())){
+				if (!(j.equals(p.getJoueur1())?p.getJoueur1():p.getJoueur2()).getGrille().getBateau(j.getNumBateauSelectionne()-1).estCoulé()){
+					j.setCiblePourTirer(new Point(x,y));
+				} else {
+					System.err.println("Le bateau " + j.getNumBateauSelectionne() + " est coulé, vous ne pouvez plus tirer avec.");
+				}
+								
 			}
 			
 		} catch (RemoteException e) {

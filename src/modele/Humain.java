@@ -53,7 +53,7 @@ public class Humain extends Joueur implements Serializable {
 			return false;
 		}
 
-		System.out.println("tir de " + numBateauSelectionne + " du joueur avec l'id " + id + " au point " + ciblePourTirer);
+		System.out.println("tir du bateau " + numBateauSelectionne + " du " + this + " au point " + ciblePourTirer);
 		
  		this.grid.bateaux.get(numBateauSelectionne - 1).tirer(ciblePourTirer, adversaire.grid);
  		//ne fonctionne pas pour une raison inconnue alors je le refais dans le client

@@ -9,9 +9,9 @@ public class Grille implements Serializable{
 	protected int taille;
 	protected int[][] grid;
 	protected ArrayList<Bateau> bateaux;
+	private int idBoat = 1;
 
 	public Grille(int taille, ArrayList<Bateau> boats){
-		int idBoat = 1;
 		Point positionBateau;
 		bateaux = boats;
 		grid = new int[taille][taille];
@@ -41,6 +41,28 @@ public class Grille implements Serializable{
 			}
 			idBoat++;
 		}
+	}
+	
+	public void ajouterBateau(Bateau boat){
+		Point positionBateau = boat.position;
+		for (int i = 0 ; i < boat.taille ; i++) {
+			switch(boat.orientation){
+			case Nord:
+				grid[positionBateau.x][positionBateau.y-i] = idBoat;
+				break;
+			case Est:
+				grid[positionBateau.x+i][positionBateau.y] = idBoat;
+				break;
+			case Sud:
+				grid[positionBateau.x][positionBateau.y+i] = idBoat;
+				break;
+			case Ouest:
+				grid[positionBateau.x-i][positionBateau.y] = idBoat;
+				break;
+			}
+		}
+		bateaux.add(boat);
+		idBoat++;
 	}
 
 	public void toucher(Point position, int puissance) {

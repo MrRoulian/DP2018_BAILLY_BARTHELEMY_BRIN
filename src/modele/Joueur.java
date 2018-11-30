@@ -72,4 +72,8 @@ public abstract class Joueur implements Serializable{
 		return id;
 	}
 	
+	public String toString(){
+		return "Joueur " + id;
+	}
+	
 }

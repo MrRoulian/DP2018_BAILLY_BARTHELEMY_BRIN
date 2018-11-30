@@ -6,12 +6,14 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.TextField;
 import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import controler.BoutonSelectionBateau;
 import controler.BoutonTir;
@@ -28,7 +30,7 @@ public class VueGraphique implements Serializable {
 	//panel 2 contient grid de l'adversaire
 	//panel 3 panel du milieu avec les controles
 	private JPanel[] panels = new JPanel[4];
-	private TextField tf;
+	private JTextArea textArea;
 	private int taille;
 	private Joueur joueur, adversaire;
 	private int numDansLeauJoueur;
@@ -64,6 +66,7 @@ public class VueGraphique implements Serializable {
 				bouton = new JButton();
 				bouton.setForeground(Color.WHITE);
 				bouton.setText(joueur.getGrille().getCase(j, i)+"");
+				bouton.setSize(new Dimension(10, 10));
 				bouton.addActionListener(new BoutonSelectionBateau(Integer.parseInt(bouton.getText()), joueur));
 				panels[1].add(bouton);
 			}
@@ -74,6 +77,7 @@ public class VueGraphique implements Serializable {
 			for (int j = 0 ; j < taille ; j++){
 				bouton = new JButton();
 				bouton.setForeground(Color.WHITE);
+				bouton.setSize(new Dimension(10, 10));
 				bouton.addActionListener(new BoutonTir(j, i, iPartie, joueur));
 				panels[2].add(bouton);
 			}
@@ -81,8 +85,9 @@ public class VueGraphique implements Serializable {
 		
 		panels[3].setPreferredSize(new Dimension(100, 50));
 		panels[3].setLayout(new GridLayout(2, 2));
-		tf = new java.awt.TextField("Cliquer sur un bateau pour le sélectionner");
-		panels[3].add(tf);
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		panels[3].add(textArea);
 		
 		panels[0].add(panels[1]);
 		panels[0].add(panels[3]);
@@ -122,12 +127,15 @@ public class VueGraphique implements Serializable {
 				if (val == numDansLeauJoueur){
 					bt.setBackground(Color.RED);	
 				} else {	
-					bt.setBackground(new Color(139,0,0));			
+					bt.setBackground(new Color(139,0,0));
+					if (joueur.getGrille().getBateau((val*-1)-1).estCoulé()){
+						bt.setBackground(Color.BLACK);
+					}		
 				}
 			} else if (val > 0){
-				bt.setBackground(Color.BLACK);				
+				bt.setBackground(Color.GRAY);		
 			} else {
-				bt.setBackground(new Color(56, 27, 232));				
+				bt.setBackground(new Color(56, 27, 232));
 			}	
 			
 			compteur++;
@@ -145,9 +153,12 @@ public class VueGraphique implements Serializable {
 			if (val < 0){
 				bt.setText(val+"");				
 				if (val == numDansLeauAdversaire){
-					bt.setBackground(Color.RED);	
+					bt.setBackground(Color.RED);					
 				} else {		
-					bt.setBackground(new Color(139,0,0));		
+					bt.setBackground(new Color(139,0,0));
+					if (adversaire.getGrille().getBateau((val*-1)-1).estCoulé()){
+						bt.setBackground(Color.BLACK);
+					}	
 				}			
 			} else {
 				bt.setText("0");
@@ -158,15 +169,28 @@ public class VueGraphique implements Serializable {
 		}	
 		
 		String txt;
+		txt = "Vous êtes le " + joueur + "\n";
+		try {
+			txt += "C'est au " + iPartie.getJoueurCourant() + " de jouer\n";
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}	
 		if (joueur.getNumBateauSelectionne() != 0){
-			txt = "Bateau "+joueur.getNumBateauSelectionne()+" selectionné, "+joueur.getGrille().getBateau(joueur.getNumBateauSelectionne()-1).toString()+"\n";
+			txt += "\nBateau "+joueur.getNumBateauSelectionne()+" selectionné, "+joueur.getGrille().getBateau(joueur.getNumBateauSelectionne()-1).toString();
 			if (joueur.getGrille().getBateau(joueur.getNumBateauSelectionne()-1).estCoulé()){
-				txt += "Le bateau est coulé il ne pourra pas tirer !";
-			}
-			tf.setText(txt);			
+				txt += "\nLe bateau est coulé il ne pourra pas tirer !";
+			}			
 		} else {
-			tf.setText("Cliquer sur un bateau pour le sélectionner");
+			txt+="\nCliquer sur un bateau pour le sélectionner";
 		}
+		
+		if (joueur.aPerdu()){
+			txt += "\n\nLe " + adversaire + " à gagné !";
+		} else if (adversaire.aPerdu()){
+			txt += "\n\nLe " + joueur + " à gagné !";			
+		}
+		
+		textArea.setText(txt);
 	}
 
 }
