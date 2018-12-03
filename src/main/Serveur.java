@@ -1,23 +1,25 @@
 package main;
 
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-
 import modele.Partie;
 
 public class Serveur {
 
-	public static void main(String[] args) throws RemoteException, AlreadyBoundException {
+	public static void main(String[] args) throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException {
 		System.out.println("Constructing server implementation...");
 		
 		Partie p = new Partie();
 		
 		System.out.println("Binding server implementation to registry...");
 		
-		Registry registry= LocateRegistry.getRegistry();
-		registry.bind("Bataille_navale", p);
+		String url = "rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Bataille_navale";
+		
+		Naming.rebind(url, p);
 		
 		System.out.println("Waiting for invocations from clients...");
 	}
