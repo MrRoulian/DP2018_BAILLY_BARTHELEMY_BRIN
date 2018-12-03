@@ -22,7 +22,7 @@ public class ClientRobot {
 
 		if (p.getJoueur1Libre()){
 			moi = p.getJoueur1();
-			p.setJoueur1Libre(false);			
+			p.setJoueur1Libre(false);
 		} else {
 			moi = p.getJoueur2();
 		}

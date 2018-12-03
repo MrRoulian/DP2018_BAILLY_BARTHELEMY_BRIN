@@ -14,7 +14,7 @@ public abstract class Bateau implements Serializable {
 	
 	public Bateau(int puissance, int resistance, int taille, Point position, Orientation orientation, Tir tir) {
 		super();
-		this.puissance = puissance;
+		this.puissance = 1;
 		this.resistance = resistance;
 		this.taille = taille;
 		this.position = position;
@@ -33,12 +33,12 @@ public abstract class Bateau implements Serializable {
 	}
 	
 	public boolean estCoulé() {
-		return resistance < 0;
+		return resistance <= 0;
 	}
 
 	@Override
 	public String toString() {
-		return "[puissance=" + puissance + ", point de vie=" + resistance + ", tir=" + tir + "]";
+		return "[point de vie=" + resistance + ", tir=" + tir + "]";
 	}
 	
 	
