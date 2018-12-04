@@ -160,7 +160,6 @@ public class VueGraphique implements Serializable {
 					}	
 				}			
 			} else {
-				bt.setText("0");
 				bt.setBackground(new Color(56, 27, 232));				
 			}
 			
