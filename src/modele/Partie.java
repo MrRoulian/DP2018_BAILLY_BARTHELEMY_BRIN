@@ -133,7 +133,7 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 
 		// ----- Creation des joueurs ----- //
 		joueur1 = new Humain(grilleJ1,1);
-		joueur2 = new Robot(grilleJ2,2);
+		joueur2 = new Humain(grilleJ2,2);
 
 		//----Set du joueur courant ----//
 		joueurCourant = joueur1;

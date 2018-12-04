@@ -150,8 +150,7 @@ public class VueGraphique implements Serializable {
 			val = adversaire.getGrille().getCase(x, y);
 
 			
-			if (val < 0){
-				bt.setText(val+"");				
+			if (val < 0){			
 				if (val == numDansLeauAdversaire){
 					bt.setBackground(Color.RED);					
 				} else {		
