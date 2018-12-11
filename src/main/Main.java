@@ -2,12 +2,14 @@ package main;
 
 import java.rmi.RemoteException;
 
+import modele.Humain;
 import modele.Partie;
+import modele.Robot;
 import vue.VueGraphique;
 
 public class Main {
 	public static void main(String[] args) throws RemoteException{
-		Partie p = new Partie();
+		Partie p = new Partie(new Humain(null,1),new Robot(null,2));
 		
 		VueGraphique vg = new VueGraphique(p.getJoueur1(),p.getJoueur2(),p);
 		

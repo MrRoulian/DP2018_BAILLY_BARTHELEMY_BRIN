@@ -42,8 +42,6 @@ public class ClientRobot {
 				moiCourrant = p.getJoueur2();
 			}
 			
-			
-			//Si j'ai pu jouer mon tour
 			p.jouerTour(moiCourrant);
 		}
 		

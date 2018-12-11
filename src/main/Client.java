@@ -16,7 +16,8 @@ import vue.VueGraphique;
 public class Client {
 	
 	public static void main(String[] args) throws NamingException, RemoteException, NotBoundException, MalformedURLException, UnknownHostException
-	{		
+	{
+		//Pour rejoindre un serveur, remplacer le InetAddress.getLocalHost().getHostAddress() par l'adresse ip du sereur
 		InterfacePartie p = (InterfacePartie) Naming.lookup("rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Bataille_navale");
 		Joueur moi = null;
 		Joueur adversaire = null;
