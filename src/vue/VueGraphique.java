@@ -124,20 +124,20 @@ public class VueGraphique implements Serializable {
 			
 			if (val < 0){				
 				if (val == numDansLeauJoueur){
-					bt.setBackground(Color.RED);
+					bt.setBackground(new Color(46,54,127));		//tir dans l'eau
 					bt.setText("");	
 				} else {	
-					bt.setBackground(new Color(139,0,0));
+					bt.setBackground(new Color(139,0,0));	//case de bateau endomagé
 					bt.setText(val+"");
 					if (joueur.getGrille().getBateau((val*-1)-1).estCoulé()){
-						bt.setBackground(Color.BLACK);
+						bt.setBackground(Color.BLACK);	//bateau coulé
 					}		
 				}
 			} else if (val > 0){
 				bt.setText(val+"");
-				bt.setBackground(Color.GRAY);
+				bt.setBackground(Color.GRAY);		//bateau intact
 			} else {
-				bt.setBackground(new Color(56, 27, 232));
+				bt.setBackground(new Color(52,72,255));		//eau
 				bt.setText("");	
 			}	
 			
@@ -155,15 +155,15 @@ public class VueGraphique implements Serializable {
 			
 			if (val < 0){			
 				if (val == numDansLeauAdversaire){
-					bt.setBackground(Color.RED);					
+					bt.setBackground(new Color(46,54,127));		//tir dans l'eau		
 				} else {		
-					bt.setBackground(new Color(139,0,0));
+					bt.setBackground(new Color(139,0,0));	//case de bateau endomagé
 					if (adversaire.getGrille().getBateau((val*-1)-1).estCoulé()){
-						bt.setBackground(Color.BLACK);
+						bt.setBackground(Color.BLACK);	//bateau coulé
 					}
 				}			
 			} else {
-				bt.setBackground(new Color(56, 27, 232));				
+				bt.setBackground(new Color(52,72,255));		//eau		
 			}
 			
 			compteur++;

@@ -176,11 +176,17 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 	}
 
 	private Tir getRandomTir() {
-		switch((int)(Math.random()*Tir.NB_TIR)){
+		switch((int)(Math.random()*5)){
 		case 0:
-			return new TirUnique();
+			return new TirEnX();
 		case 1:
 			return new TirCroix();
+		case 2:
+			return new TirImprobable();
+		case 3:
+			return new TirTordu();
+		case 4:
+			return new TirUnique();
 		default :
 			return new TirUnique();
 		}
