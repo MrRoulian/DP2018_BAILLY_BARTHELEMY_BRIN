@@ -121,21 +121,24 @@ public class VueGraphique implements Serializable {
 			y=compteur/taille;
 			val = joueur.getGrille().getCase(x, y);
 
-			bt.setText(val+"");
 			
 			if (val < 0){				
 				if (val == numDansLeauJoueur){
-					bt.setBackground(Color.RED);	
+					bt.setBackground(Color.RED);
+					bt.setText("");	
 				} else {	
 					bt.setBackground(new Color(139,0,0));
+					bt.setText(val+"");
 					if (joueur.getGrille().getBateau((val*-1)-1).estCoulé()){
 						bt.setBackground(Color.BLACK);
 					}		
 				}
 			} else if (val > 0){
-				bt.setBackground(Color.GRAY);		
+				bt.setText(val+"");
+				bt.setBackground(Color.GRAY);
 			} else {
 				bt.setBackground(new Color(56, 27, 232));
+				bt.setText("");	
 			}	
 			
 			compteur++;
@@ -157,7 +160,7 @@ public class VueGraphique implements Serializable {
 					bt.setBackground(new Color(139,0,0));
 					if (adversaire.getGrille().getBateau((val*-1)-1).estCoulé()){
 						bt.setBackground(Color.BLACK);
-					}	
+					}
 				}			
 			} else {
 				bt.setBackground(new Color(56, 27, 232));				
