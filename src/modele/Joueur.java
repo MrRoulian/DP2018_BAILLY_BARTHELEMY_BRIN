@@ -75,5 +75,9 @@ public abstract class Joueur implements Serializable{
 	public String toString(){
 		return "Joueur " + id;
 	}
+
+	public void setGrid(Grille grille) {
+		this.grid=grille;		
+	}
 	
 }

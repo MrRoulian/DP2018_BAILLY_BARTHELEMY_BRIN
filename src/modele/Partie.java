@@ -16,7 +16,7 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 	private transient VueGraphique vg;
 	private boolean joueur1Libre = true;
 
-	public Partie() throws RemoteException{
+	public Partie(Joueur j1, Joueur j2) throws RemoteException{
 		// ----- Recuperation de l'instance de la factory ----- //
 		bateauFactory = BateauXX.getInstance();
 
@@ -24,7 +24,7 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 		// Taille de la grille :
 		int taille = 10;
 
-		genererPartieRandom(taille, 10, bateauFactory);
+		genererPartieRandom(taille, 10, bateauFactory, j1, j2);
 
 		/*
 		// Creation de la liste de bateau :
@@ -66,7 +66,7 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 		}
 	}
 
-	public void genererPartieRandom(int taille, int nbBateaux, BateauFactory epoque){
+	public void genererPartieRandom(int taille, int nbBateaux, BateauFactory epoque, Joueur j1, Joueur j2){
 		boolean ok = false;
 		Point p = null;
 		Orientation orient = null;
@@ -132,8 +132,10 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 		}		
 
 		// ----- Creation des joueurs ----- //
-		joueur1 = new Humain(grilleJ1,1);
-		joueur2 = new Humain(grilleJ2,2);
+		j1.setGrid(grilleJ1);
+		j2.setGrid(grilleJ2);
+		joueur1=j1;
+		joueur2=j2;
 
 		//----Set du joueur courant ----//
 		joueurCourant = joueur1;
