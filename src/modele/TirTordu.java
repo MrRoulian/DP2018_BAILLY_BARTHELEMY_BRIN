@@ -11,29 +11,37 @@ public class TirTordu implements Tir {
 			cible.toucher(position, puissance);
 			break;
 		case 4:
-			Point pGauche = new Point(position);
-			pGauche.x--;
-			cible.toucher(pGauche, puissance);
+			if (position.x - 1 >= 0) {
+				Point pGauche = new Point(position);
+				pGauche.x--;
+				cible.toucher(pGauche, puissance);
+			}
 			break;
 		case 5:
-			Point pDroite = new Point(position);
-			pDroite.x++;
-			cible.toucher(pDroite, puissance);
+			if (position.x + 1 < cible.taille) {
+				Point pDroite = new Point(position);
+				pDroite.x++;
+				cible.toucher(pDroite, puissance);
+			}
 			break;
 		case 6:
-			Point pHaut = new Point(position);
-			pHaut.y--;
-			cible.toucher(pHaut, puissance);
+			if (position.y - 1 >= 0) {
+				Point pHaut = new Point(position);
+				pHaut.y--;
+				cible.toucher(pHaut, puissance);
+			}
 			break;
 		case 7:
-			Point pBas = new Point(position);
-			pBas.y++;
-			cible.toucher(pBas, puissance);
+			if (position.y + 1 < cible.taille) {
+				Point pBas = new Point(position);
+				pBas.y++;
+				cible.toucher(pBas, puissance);
+			}
 			break;		
 		}
 	}
 
-	
+
 	@Override
 	public String toString(){
 		return "Tir tordu";		
