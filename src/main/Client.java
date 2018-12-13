@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
+import modele.Humain;
 import modele.InterfacePartie;
 import modele.Joueur;
 import vue.VueGraphique;
@@ -18,11 +19,48 @@ public class Client {
 	public static void main(String[] args) throws NamingException, RemoteException, NotBoundException, MalformedURLException, UnknownHostException
 	{
 		//Pour rejoindre un serveur, remplacer le InetAddress.getLocalHost().getHostAddress() par l'adresse ip du sereur
-		InterfacePartie p = (InterfacePartie) Naming.lookup("rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Bataille_navale");
+		InterfacePartie p = null;
+		
+		if (args.length == 1){
+			p = (InterfacePartie) Naming.lookup("rmi://" + args[0] + "/Bataille_navale");
+		} else if (args.length == 0){
+			p = (InterfacePartie) Naming.lookup("rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Bataille_navale");
+		} else {
+			System.out.println(	"Pour utiliser le client en ligne avec un autre joueur il faut mettre son adresse ip en paramètre\n"+
+								"java Client 192.168.43.17 par exemple");
+		}
+		
 		Joueur moi = null;
 		Joueur adversaire = null;
-
+		boolean isJoueur1 = false;
+		
 		if (p.getJoueur1Libre()){
+			p.setJoueur1Libre(false);
+			isJoueur1=true;
+			p.setJoueur1(new Humain(null, 1));
+		} else {
+			p.setJoueur2(new Humain(null, 2));
+			p.setEveryPlayersReady(true);
+		}
+		
+		while(!p.isEveryPlayersReady()){
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("En attente d'adversaire");
+		}
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (isJoueur1){
 			moi = p.getJoueur1();
 			adversaire = p.getJoueur2();
 			p.setJoueur1Libre(false);			

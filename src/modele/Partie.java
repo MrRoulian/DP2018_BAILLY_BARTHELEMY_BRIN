@@ -15,16 +15,23 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 	private BateauFactory bateauFactory;
 	private transient VueGraphique vg;
 	private boolean joueur1Libre = true;
+	protected boolean everyPlayersReady;
+	
+	public Partie() throws RemoteException{
+		
+	}
 
-	public Partie(Joueur j1, Joueur j2) throws RemoteException{
+	public Partie(Joueur j1, Joueur j2, BateauFactory factory) throws RemoteException{
 		// ----- Recuperation de l'instance de la factory ----- //
-		bateauFactory = BateauXX.getInstance();
+		bateauFactory = factory;
 
 		// ----- Creation des grille ----- //
 		// Taille de la grille :
 		int taille = 10;
-
-		genererPartieRandom(taille, 10, bateauFactory, j1, j2);
+		
+		this.joueur1 = j1;
+		this.joueur2 = j2;
+		genererPartieRandom(taille, 10, bateauFactory);
 
 		/*
 		// Creation de la liste de bateau :
@@ -66,7 +73,7 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 		}
 	}
 
-	public void genererPartieRandom(int taille, int nbBateaux, BateauFactory epoque, Joueur j1, Joueur j2){
+	public void genererPartieRandom(int taille, int nbBateaux, BateauFactory epoque){
 		boolean ok = false;
 		Point p = null;
 		Orientation orient = null;
@@ -132,10 +139,8 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 		}		
 
 		// ----- Creation des joueurs ----- //
-		j1.setGrid(grilleJ1);
-		j2.setGrid(grilleJ2);
-		joueur1=j1;
-		joueur2=j2;
+		joueur1.setGrid(grilleJ1);
+		joueur2.setGrid(grilleJ2);
 
 		//----Set du joueur courant ----//
 		joueurCourant = joueur1;
@@ -234,6 +239,16 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 	}
 
 	@Override
+	public boolean isEveryPlayersReady() {
+		return everyPlayersReady;
+	}
+
+	@Override
+	public void setEveryPlayersReady(boolean everyPlayersReady) {
+		this.everyPlayersReady = everyPlayersReady;
+	}
+
+	@Override
 	public Joueur getJoueur1() {
 		return joueur1;
 	}
@@ -262,6 +277,18 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 	public void setJoueur1Libre(boolean b) throws RemoteException {
 		joueur1Libre = b;		
 	}
+	
+	@Override
+	public void setJoueur1(Joueur j) throws RemoteException {
+		this.joueur1 = j;		
+	}
+
+	@Override
+	public void setJoueur2(Joueur j) throws RemoteException {
+		this.joueur2 = j;		
+	}
+	
+	
 
 
 
