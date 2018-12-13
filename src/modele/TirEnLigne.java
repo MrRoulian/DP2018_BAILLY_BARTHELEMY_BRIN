@@ -4,11 +4,10 @@ import java.awt.Point;
 
 public class TirEnLigne implements Tir {
 	
-	private int sens = 0;
+	private int	sens = (int)(Math.random()*2);
 
 	@Override
 	public void tirer(Point position, Grille cible, int puissance) {
-		sens = (int)(Math.random()*2);
 		cible.toucher(position, puissance);
 		if (sens == 0){		//Horizontal
 			if (position.x - 1 >= 0) {
