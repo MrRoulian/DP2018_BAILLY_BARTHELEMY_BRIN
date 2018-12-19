@@ -12,4 +12,9 @@ public class Croiser extends BateauGros{
 		super(10, 8, position, orientation, tir);
 	}
 
+	@Override
+	public String toString() {
+		return "Croiseur : "+super.toString();
+	}
+
 }

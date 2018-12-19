@@ -12,4 +12,9 @@ public class Galion extends BateauGros {
 		super(4, 5, position, orientation, tir);
 	}
 
+	@Override
+	public String toString() {
+		return "Galion : "+super.toString();
+	}
+
 }

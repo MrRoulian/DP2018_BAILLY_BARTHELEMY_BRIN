@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import exception.TropDeBateauException;
 import vue.VueGraphique;
 
 public class Partie extends UnicastRemoteObject implements InterfacePartie {
@@ -16,12 +17,13 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 	private transient VueGraphique vg;
 	private boolean joueur1Libre = true;
 	protected boolean everyPlayersReady;
+	protected boolean isEnded = false;
 	
 	public Partie() throws RemoteException{
 		
 	}
 
-	public Partie(Joueur j1, Joueur j2, BateauFactory factory) throws RemoteException{
+	public Partie(Joueur j1, Joueur j2, BateauFactory factory) throws RemoteException, TropDeBateauException{
 		// ----- Recuperation de l'instance de la factory ----- //
 		bateauFactory = factory;
 
@@ -73,7 +75,7 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 		}
 	}
 
-	public void genererPartieRandom(int taille, int nbBateaux, BateauFactory epoque){
+	public void genererPartieRandom(int taille, int nbBateaux, BateauFactory epoque) throws TropDeBateauException{
 		boolean ok = false;
 		Point p = null;
 		Orientation orient = null;
@@ -86,57 +88,84 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 		// Joueur 2 :
 		Grille grilleJ2 = new Grille(taille, new ArrayList<Bateau>());
 
+		int compteur = 0;
+		int varDebug = 1000;
 		for (int i = 0 ; i < nbBateaux ; i++){
 			ok = false;
+			//switch sur la taille du bateau, petit moyen ou grand
 			switch ((int)(Math.random()*3)){
 			case 0:
 				while(!ok){
+					//si on arrive pas a placer le bateau au bout de la varDebug ème fois on arrête d'essayer de placer
+					if (compteur >= varDebug){ throw new TropDeBateauException(); }
 					p = new Point((int)(Math.random()*taille),(int)(Math.random()*taille));
 					orient = getRandomOrientation();
 					tir = getRandomTir();
 					ok = calculerListePointCorrect(p,orient,taille,4,grilleJ1);
+					compteur++;
 				}
+				compteur = 0;
 				grilleJ1.ajouterBateau(epoque.getGrosBateau(p, orient, tir));
 				ok = false;
 				while(!ok){
+					//si on arrive pas a placer le bateau au bout de la varDebug ème fois on arrête d'essayer de placer
+					if (compteur >= varDebug){ throw new TropDeBateauException(); }
 					p = new Point((int)(Math.random()*taille),(int)(Math.random()*taille));
 					ok = calculerListePointCorrect(p,orient,taille,4,grilleJ2);
+					compteur++;
 				}
+				compteur = 0;
 				grilleJ2.ajouterBateau(epoque.getGrosBateau(p, orient, tir));
 				
 				break;
 			case 1:
 				while(!ok){
+					//si on arrive pas a placer le bateau au bout de la varDebug ème fois on arrête d'essayer de placer
+					if (compteur >= varDebug){ throw new TropDeBateauException(); }
 					p = new Point((int)(Math.random()*taille),(int)(Math.random()*taille));
 					orient = getRandomOrientation();
 					tir = getRandomTir();
 					ok = calculerListePointCorrect(p,orient,taille,2,grilleJ1);
+					compteur++;
 				}
+				compteur = 0;
 				grilleJ1.ajouterBateau(epoque.getMoyenBateau(p, orient, tir));
 				ok = false;
 				while(!ok){
+					//si on arrive pas a placer le bateau au bout de la varDebug ème fois on arrête d'essayer de placer
+					if (compteur >= varDebug){ throw new TropDeBateauException(); }
 					p = new Point((int)(Math.random()*taille),(int)(Math.random()*taille));
 					ok = calculerListePointCorrect(p,orient,taille,2,grilleJ2);
+					compteur++;
 				}
+				compteur = 0;
 				grilleJ2.ajouterBateau(epoque.getMoyenBateau(p, orient, tir));
 				break;
 			case 2:
 				while(!ok){
+					//si on arrive pas a placer le bateau au bout de la varDebug ème fois on arrête d'essayer de placer
+					if (compteur >= varDebug){ throw new TropDeBateauException(); }
 					p = new Point((int)(Math.random()*taille),(int)(Math.random()*taille));
 					orient = getRandomOrientation();
 					tir = getRandomTir();
 					ok = calculerListePointCorrect(p,orient,taille,1,grilleJ1);
+					compteur++;
 				}
+				compteur = 0;
 				grilleJ1.ajouterBateau(epoque.getPetitBateau(p, orient, tir));
 				ok = false;
 				while(!ok){
+					//si on arrive pas a placer le bateau au bout de la varDebug ème fois on arrête d'essayer de placer
+					if (compteur >= varDebug){ throw new TropDeBateauException(); }
 					p = new Point((int)(Math.random()*taille),(int)(Math.random()*taille));
 					ok = calculerListePointCorrect(p,orient,taille,1,grilleJ2);
+					compteur++;
 				}
+				compteur = 0;
 				grilleJ2.ajouterBateau(epoque.getPetitBateau(p, orient, tir));
 				break;
 			}
-		}		
+		}
 
 		// ----- Creation des joueurs ----- //
 		joueur1.setGrid(grilleJ1);
@@ -209,11 +238,13 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 
 		if (joueur2.aPerdu()) {
 			System.out.println("Victoire du joueur 1");
+			isEnded=true;
 			return false;
 		}
 
 		if (joueur1.aPerdu()) {
 			System.out.println("Victoire du joueur 2");
+			isEnded=true;
 			return false;
 		}		
 
@@ -289,9 +320,10 @@ public class Partie extends UnicastRemoteObject implements InterfacePartie {
 	public void setJoueur2(Joueur j) throws RemoteException {
 		this.joueur2 = j;		
 	}
-	
-	
 
-
+	@Override
+	public boolean isEnded() throws RemoteException {
+		return isEnded;
+	}
 
 }

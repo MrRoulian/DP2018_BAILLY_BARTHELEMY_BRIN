@@ -39,7 +39,6 @@ public abstract class Bateau implements Serializable {
 	@Override
 	public String toString() {
 		return "[point de vie=" + resistance + ", tir=" + tir + "]";
-	}
-	
+	}	
 	
 }

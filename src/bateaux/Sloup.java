@@ -12,4 +12,9 @@ public class Sloup extends BateauMoyen {
 		super(3, 2, position, orientation, tir);
 	}
 
+	@Override
+	public String toString() {
+		return "Sloup : "+super.toString();
+	}
+
 }
