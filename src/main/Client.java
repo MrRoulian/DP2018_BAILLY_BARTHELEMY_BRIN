@@ -78,7 +78,7 @@ public class Client {
 		Joueur moiCourrant = null;
 		Joueur adversaireCourrant = null;
 
-		while(true){
+		while(!p.isEnded()){
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e1) {

@@ -18,6 +18,7 @@ public interface InterfacePartie extends Remote {
 	public void setEveryPlayersReady(boolean allReady) throws RemoteException;
 	public void setJoueur1(Joueur j) throws RemoteException;
 	public void setJoueur2(Joueur j) throws RemoteException;
+	public boolean isEnded() throws RemoteException;
 	
 
 }

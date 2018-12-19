@@ -12,4 +12,9 @@ public class Chasseur extends BateauMoyen {
 		super(7, 5, position, orientation, tir);
 	}
 
+	@Override
+	public String toString() {
+		return "Chasseur : "+super.toString();
+	}
+
 }

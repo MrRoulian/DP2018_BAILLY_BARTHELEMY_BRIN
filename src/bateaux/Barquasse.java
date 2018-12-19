@@ -12,4 +12,9 @@ public class Barquasse extends BateauPetit {
 		super(1, 1, position, orientation, tir);
 	}
 
+	@Override
+	public String toString() {
+		return "Barquasse : "+super.toString();
+	}
+
 }

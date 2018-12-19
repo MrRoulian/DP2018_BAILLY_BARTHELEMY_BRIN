@@ -57,7 +57,7 @@ public class ClientRobot {
 		
 		Joueur moiCourrant = null;
 		
-		while(true){
+		while(!p.isEnded()){
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e1) {
