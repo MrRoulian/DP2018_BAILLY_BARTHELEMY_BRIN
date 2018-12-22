@@ -79,7 +79,7 @@ public class Serveur {
 		
 		while(!p.isEnded()){
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
