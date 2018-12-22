@@ -36,8 +36,7 @@ public class BoutonTir implements ActionListener{
 			}
 			
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//Si on arrive ici, c'est surement que la partie est terminé
 		}
 	}
 

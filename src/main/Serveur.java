@@ -11,13 +11,11 @@ import exception.TropDeBateauException;
 import modele.BateauFactory;
 import modele.BateauXVI;
 import modele.BateauXX;
-import modele.Humain;
 import modele.Partie;
-import modele.Robot;
 
 public class Serveur {
 
-	public static void main(String[] args) throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, TropDeBateauException {
+	public static void main(String[] args) throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, TropDeBateauException, InterruptedException {
 		String utilisation = "Utilisation : java Serveur <epoque> <taille d'arrène> <nombre de bateau>\nIl faut remplacer époque par 1 pour séléctionner époque XVIe siecle et 2 pour XXe siecle.";
 		BateauFactory fact = null;
 		int taille = 0;
@@ -78,12 +76,11 @@ public class Serveur {
 		p.genererPartieRandom(taille, nbBateau, fact);
 		
 		while(!p.isEnded()){
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
+			Thread.sleep(500);
 		}
+		
+		//Sert à ce que le client finisse toujours avant le serveur, pour ne pas générer d'exception
+		Thread.sleep(500);
 		
 		System.exit(1);
 	}
