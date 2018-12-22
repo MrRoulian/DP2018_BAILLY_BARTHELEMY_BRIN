@@ -16,7 +16,7 @@ import vue.VueGraphique;
 
 public class Client {
 
-	public static void main(String[] args) throws NamingException, RemoteException, NotBoundException, MalformedURLException, UnknownHostException
+	public static void main(String[] args) throws NamingException, RemoteException, NotBoundException, MalformedURLException, UnknownHostException, InterruptedException
 	{
 		//Pour rejoindre un serveur, remplacer le InetAddress.getLocalHost().getHostAddress() par l'adresse ip du sereur
 		InterfacePartie p = null;
@@ -48,21 +48,12 @@ public class Client {
 		}
 
 		while(!p.isEveryPlayersReady()){
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Thread.sleep(500);
 			System.out.println("En attente d'adversaire");
 		}
 
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//On attend pour être sur que le serveur a tout instancié
+		Thread.sleep(1000);
 
 		if (isJoueur1){
 			moi = p.getJoueur1();
