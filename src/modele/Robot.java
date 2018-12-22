@@ -17,7 +17,6 @@ public class Robot extends Joueur implements Serializable {
 			bateau = (int) (Math.random() * grid.bateaux.size());
 		}
 		Point p=trouverBateauEndomage(adversaire);
-		System.out.println(p);
 		if(p!=null) {
 			x = p.x;
 			y = p.y;
@@ -45,7 +44,6 @@ public class Robot extends Joueur implements Serializable {
 				if(adversaire.grid.grid[i][j]<0 && adversaire.grid.grid[i][j]!=num) {
 					int idBoat=((adversaire.grid.grid[i][j])*-1)-1;
 					Bateau b=adversaire.grid.bateaux.get(idBoat);
-					System.out.println(b);
 					if(!b.estCoulé()) {
 						if(j>=1) {
 							if(adversaire.grid.grid[i][j-1]>=0 && adversaire.grid.grid[i][j-1]!=num) {

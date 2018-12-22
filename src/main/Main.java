@@ -10,6 +10,7 @@ import modele.Robot;
 import vue.VueGraphique;
 
 public class Main {
+	//est obseléte depuis le RMI, sert juste pour les tests
 	public static void main(String[] args) throws RemoteException, TropDeBateauException{
 		Partie p = new Partie(new Humain(null,1),new Robot(null,2),BateauXX.getInstance());
 		
