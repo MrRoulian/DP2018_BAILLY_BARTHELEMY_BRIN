@@ -52,7 +52,7 @@ public class Client {
 			System.out.println("En attente d'adversaire");
 		}
 
-		//On attend pour être sur que le serveur a tout instancie
+		//On attend pour etre sur que le serveur a tout instancie
 		Thread.sleep(1000);
 
 		if (isJoueur1){
