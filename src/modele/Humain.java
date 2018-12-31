@@ -18,11 +18,11 @@ public class Humain extends Joueur implements Serializable {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Selection du bateau qui tire");
 		bateau = sc.nextInt();
-		while (bateau - 1 < 0 || bateau - 1 > grid.bateaux.size() || grid.bateaux.get(bateau - 1).estCoulé()) {
+		while (bateau - 1 < 0 || bateau - 1 > grid.bateaux.size() || grid.bateaux.get(bateau - 1).estCoule()) {
 			if (bateau - 1 < 0 || bateau - 1 > grid.bateaux.size()) {
 				System.err.println("Le bateau " + bateau + " n'existe pas");
 			} else {
-				System.err.println("Le bateau " + bateau + " est coulé il ne peux pas tirer");
+				System.err.println("Le bateau " + bateau + " est coule il ne peux pas tirer");
 			}
 			System.out.println("Selection du bateau qui tire");
 			bateau = sc.nextInt();
@@ -48,8 +48,8 @@ public class Humain extends Joueur implements Serializable {
  		if (numBateauSelectionne - 1 < 0 || numBateauSelectionne - 1 > grid.bateaux.size()) {
 			System.err.println("Le bateau " + numBateauSelectionne + " n'existe pas");
 			return false;
-		} else if (grid.bateaux.get(numBateauSelectionne - 1).estCoulé()){
-			System.err.println("Le bateau " + numBateauSelectionne + " est coulé il ne peux pas tirer");
+		} else if (grid.bateaux.get(numBateauSelectionne - 1).estCoule()){
+			System.err.println("Le bateau " + numBateauSelectionne + " est coule il ne peux pas tirer");
 			return false;
 		}
 

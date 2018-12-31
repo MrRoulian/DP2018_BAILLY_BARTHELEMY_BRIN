@@ -25,10 +25,10 @@ public class Client {
 			p = (InterfacePartie) Naming.lookup("rmi://" + args[0] + "/Bataille_navale");
 		} else if (args.length == 0){
 			p = (InterfacePartie) Naming.lookup("rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Bataille_navale");
-			System.out.println(	"Pour utiliser le client en ligne avec un autre joueur il faut mettre son adresse ip en paramètre\n"+
+			System.out.println(	"Pour utiliser le client en ligne avec un autre joueur il faut mettre son adresse ip en parametre\n"+
 					"java Client 192.168.43.17 par exemple");
 		} else {
-			System.out.println(	"Pour utiliser le client en ligne avec un autre joueur il faut mettre son adresse ip en paramètre\n"+
+			System.out.println(	"Pour utiliser le client en ligne avec un autre joueur il faut mettre son adresse ip en parametre\n"+
 					"java Client 192.168.43.17 par exemple");
 		}
 
@@ -52,7 +52,7 @@ public class Client {
 			System.out.println("En attente d'adversaire");
 		}
 
-		//On attend pour être sur que le serveur a tout instancié
+		//On attend pour être sur que le serveur a tout instancie
 		Thread.sleep(1000);
 
 		if (isJoueur1){
@@ -94,7 +94,7 @@ public class Client {
 				moi.setCiblePourTirer(null);	
 			}
 
-			//Mets à jour l'affichage
+			//Mets a jour l'affichage
 			vg.update();
 		}
 

@@ -22,7 +22,7 @@ public abstract class Joueur implements Serializable{
 	public boolean aPerdu() {
 		boolean perdu = true;
 		for (Bateau bateau : grid.bateaux) {
-			if (!bateau.estCoulé()) {
+			if (!bateau.estCoule()) {
 				perdu = false; 
 				break;
 			}

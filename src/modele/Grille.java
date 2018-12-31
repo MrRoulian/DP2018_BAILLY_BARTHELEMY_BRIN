@@ -68,9 +68,9 @@ public class Grille implements Serializable{
 	public void toucher(Point position, int puissance) {
 		if (grid[position.x][position.y] == 0) {
 			grid[position.x][position.y] = getNumDansLeau();
-		} else if (grid[position.x][position.y] > 0 && grid[position.x][position.y] != getNumDansLeau()) { //si je tire sur un bateau pas déjà touché
+		} else if (grid[position.x][position.y] > 0 && grid[position.x][position.y] != getNumDansLeau()) { //si je tire sur un bateau pas deja touche
 			bateaux.get(Math.abs(grid[position.x][position.y]) -1).subirFrappe(puissance); //il subit la frappe
-			grid[position.x][position.y] = -1 * Math.abs(grid[position.x][position.y]); //et devient négatif
+			grid[position.x][position.y] = -1 * Math.abs(grid[position.x][position.y]); //et devient negatif
 		} 
 	}
 

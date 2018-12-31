@@ -24,10 +24,10 @@ public class ClientRobot {
 			p = (InterfacePartie) Naming.lookup("rmi://" + args[0] + "/Bataille_navale");
 		} else if (args.length == 0){
 			p = (InterfacePartie) Naming.lookup("rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Bataille_navale");
-			System.out.println(	"Pour utiliser le bot en ligne il faut mettre l'adresse ip du serveur en paramètre\n"+
+			System.out.println(	"Pour utiliser le bot en ligne il faut mettre l'adresse ip du serveur en parametre\n"+
 					"java ClientRobot 192.168.43.17 par exemple");
 		} else {
-			System.out.println(	"Pour utiliser le bot en ligne il faut mettre l'adresse ip du serveur en paramètre\n"+
+			System.out.println(	"Pour utiliser le bot en ligne il faut mettre l'adresse ip du serveur en parametre\n"+
 					"java ClientRobot 192.168.43.17 par exemple");
 		}
 
@@ -47,7 +47,7 @@ public class ClientRobot {
 			Thread.sleep(500);
 		}
 
-		//On attend pour être sur que le serveur a tout instancié
+		//On attend pour être sur que le serveur a tout instancie
 		Thread.sleep(1000);
 
 

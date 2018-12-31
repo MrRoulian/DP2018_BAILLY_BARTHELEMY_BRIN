@@ -23,7 +23,7 @@ public abstract class Bateau implements Serializable {
 	}
 
 	public void tirer(Point position, Grille cible) {
-		if (!estCoulé()) {
+		if (!estCoule()) {
 			tir.tirer(position, cible, puissance);
 		}
 	}
@@ -32,7 +32,7 @@ public abstract class Bateau implements Serializable {
 		resistance -= puissance;
 	}
 	
-	public boolean estCoulé() {
+	public boolean estCoule() {
 		return resistance <= 0;
 	}
 

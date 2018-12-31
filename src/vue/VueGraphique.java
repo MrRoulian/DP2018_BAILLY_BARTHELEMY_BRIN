@@ -127,10 +127,10 @@ public class VueGraphique implements Serializable {
 					bt.setBackground(new Color(46,54,127));		//tir dans l'eau
 					bt.setText("");	
 				} else {	
-					bt.setBackground(new Color(139,0,0));	//case de bateau endomagé
+					bt.setBackground(new Color(139,0,0));	//case de bateau endomage
 					bt.setText(val+"");
-					if (joueur.getGrille().getBateau((val*-1)-1).estCoulé()){
-						bt.setBackground(Color.BLACK);	//bateau coulé
+					if (joueur.getGrille().getBateau((val*-1)-1).estCoule()){
+						bt.setBackground(Color.BLACK);	//bateau coule
 					}		
 				}
 			} else if (val > 0){
@@ -157,9 +157,9 @@ public class VueGraphique implements Serializable {
 				if (val == numDansLeauAdversaire){
 					bt.setBackground(new Color(46,54,127));		//tir dans l'eau		
 				} else {		
-					bt.setBackground(new Color(139,0,0));	//case de bateau endomagé
-					if (adversaire.getGrille().getBateau((val*-1)-1).estCoulé()){
-						bt.setBackground(Color.BLACK);	//bateau coulé
+					bt.setBackground(new Color(139,0,0));	//case de bateau endomage
+					if (adversaire.getGrille().getBateau((val*-1)-1).estCoule()){
+						bt.setBackground(Color.BLACK);	//bateau coule
 					}
 				}			
 			} else {
@@ -177,18 +177,18 @@ public class VueGraphique implements Serializable {
 			e.printStackTrace();
 		}	
 		if (joueur.getNumBateauSelectionne() != 0){
-			txt += "\nBateau "+joueur.getNumBateauSelectionne()+" selectionné, "+joueur.getGrille().getBateau(joueur.getNumBateauSelectionne()-1).toString();
-			if (joueur.getGrille().getBateau(joueur.getNumBateauSelectionne()-1).estCoulé()){
-				txt += "\nLe bateau est coulé il ne pourra pas tirer !";
+			txt += "\nBateau "+joueur.getNumBateauSelectionne()+" selectionne, "+joueur.getGrille().getBateau(joueur.getNumBateauSelectionne()-1).toString();
+			if (joueur.getGrille().getBateau(joueur.getNumBateauSelectionne()-1).estCoule()){
+				txt += "\nLe bateau est coule il ne pourra pas tirer !";
 			}			
 		} else {
-			txt+="\nCliquer sur un bateau pour le sélectionner";
+			txt+="\nCliquer sur un bateau pour le selectionner";
 		}
 		
 		if (joueur.aPerdu()){
-			txt += "\n\nLe " + adversaire + " à gagné !";
+			txt += "\n\nLe " + adversaire + " a gagne !";
 		} else if (adversaire.aPerdu()){
-			txt += "\n\nLe " + joueur + " à gagné !";			
+			txt += "\n\nLe " + joueur + " a gagne !";			
 		}
 		
 		textArea.setText(txt);

@@ -14,7 +14,7 @@ public class Aeroglisseur extends BateauPetit {
 
 	@Override
 	public String toString() {
-		return "Aéroglisseur :"+super.toString();
+		return "Aeroglisseur :"+super.toString();
 	}
 
 }
