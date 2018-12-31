@@ -47,7 +47,7 @@ public class ClientRobot {
 			Thread.sleep(500);
 		}
 
-		//On attend pour être sur que le serveur a tout instancie
+		//On attend pour etre sur que le serveur a tout instancie
 		Thread.sleep(1000);
 
 
