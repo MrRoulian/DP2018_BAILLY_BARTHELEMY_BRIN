@@ -8,6 +8,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import modele.Humain;
 import modele.InterfacePartie;
@@ -18,6 +20,16 @@ public class Client {
 
 	public static void main(String[] args) throws NamingException, RemoteException, NotBoundException, MalformedURLException, UnknownHostException, InterruptedException
 	{
+		
+		try {
+		     UIManager.setLookAndFeel(new 
+		javax.swing.plaf.metal.MetalLookAndFeel());
+
+		} catch (UnsupportedLookAndFeelException e) {
+		     e.printStackTrace();
+		}
+
+		
 		//Pour rejoindre un serveur, remplacer le InetAddress.getLocalHost().getHostAddress() par l'adresse ip du sereur
 		InterfacePartie p = null;
 
@@ -25,10 +37,10 @@ public class Client {
 			p = (InterfacePartie) Naming.lookup("rmi://" + args[0] + "/Bataille_navale");
 		} else if (args.length == 0){
 			p = (InterfacePartie) Naming.lookup("rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Bataille_navale");
-			System.out.println(	"Pour utiliser le client en ligne avec un autre joueur il faut mettre son adresse ip en parametre\n"+
+			System.out.println(	"Pour utiliser le client en ligne avec un autre joueur il faut mettre son adresse ip en paramètre\n"+
 					"java Client 192.168.43.17 par exemple");
 		} else {
-			System.out.println(	"Pour utiliser le client en ligne avec un autre joueur il faut mettre son adresse ip en parametre\n"+
+			System.out.println(	"Pour utiliser le client en ligne avec un autre joueur il faut mettre son adresse ip en paramètre\n"+
 					"java Client 192.168.43.17 par exemple");
 		}
 
@@ -52,7 +64,7 @@ public class Client {
 			System.out.println("En attente d'adversaire");
 		}
 
-		//On attend pour etre sur que le serveur a tout instancie
+		//On attend pour être sur que le serveur a tout instancié
 		Thread.sleep(1000);
 
 		if (isJoueur1){
@@ -94,7 +106,7 @@ public class Client {
 				moi.setCiblePourTirer(null);	
 			}
 
-			//Mets a jour l'affichage
+			//Mets à jour l'affichage
 			vg.update();
 		}
 
